@@ -605,6 +605,7 @@ main {
 
 .manifesto h2,
 .daily-copy h2,
+.skills-copy h2,
 .personality-copy h2,
 .memory-copy h2,
 .travel-heading h2,
@@ -816,6 +817,492 @@ main {
   margin: 0;
   font-size: 13px;
   line-height: 1.6;
+}
+
+/* Skill 展示区：用真实聊天窗口解释“同一旅伴，多种身份”的产品逻辑。 */
+.skills-section {
+  position: relative;
+  min-height: 1050px;
+  display: grid;
+  grid-template-columns: minmax(330px, 0.62fr) minmax(640px, 1.38fr);
+  align-items: center;
+  gap: clamp(58px, 7vw, 126px);
+  padding: 150px max(40px, calc((100vw - 1440px) / 2));
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 84% 8%, rgba(118, 214, 247, 0.42), transparent 27%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.62), transparent 58%),
+    #e9e8fb;
+  isolation: isolate;
+}
+
+.skills-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(8, 11, 24, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 11, 24, 0.045) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.25));
+}
+
+.skills-section::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 620px;
+  height: 620px;
+  left: -270px;
+  bottom: -260px;
+  border: 1px solid rgba(8, 11, 24, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 82px rgba(8, 11, 24, 0.025);
+}
+
+.skills-signal {
+  position: absolute;
+  right: -28px;
+  top: 62px;
+  color: rgba(8, 11, 24, 0.035);
+  font-family: Georgia, serif;
+  font-size: clamp(120px, 15vw, 240px);
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+  pointer-events: none;
+}
+
+.skills-copy,
+.skill-demo {
+  position: relative;
+  z-index: 2;
+}
+
+.skills-copy h2 {
+  margin: 58px 0 36px;
+  font-size: clamp(56px, 5.4vw, 92px);
+}
+
+.skills-copy h2 em {
+  color: var(--violet);
+  font-family: "STSong", "Songti SC", serif;
+  font-weight: 400;
+}
+
+.skills-lead {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(8, 11, 24, 0.66);
+  font-size: 15px;
+  line-height: 2;
+}
+
+.skills-principle {
+  max-width: 430px;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: center;
+  margin-top: 42px;
+  padding: 24px 0;
+  border-top: 1px solid rgba(8, 11, 24, 0.13);
+  border-bottom: 1px solid rgba(8, 11, 24, 0.13);
+}
+
+.skills-principle span {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--ink-soft);
+  border-radius: 50%;
+  font-family: Georgia, serif;
+  font-size: 8px;
+}
+
+.skills-principle p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.skills-principle i {
+  grid-column: 1;
+  width: 1px;
+  height: 20px;
+  margin-left: 11px;
+  background: rgba(8, 11, 24, 0.18);
+}
+
+.skills-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 24px 0 0;
+  color: rgba(8, 11, 24, 0.48);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.skills-note i {
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 201, 112, 0.76);
+}
+
+.skill-demo {
+  width: 100%;
+  overflow: hidden;
+  color: #fff;
+  background: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 30px;
+  box-shadow: 0 42px 110px rgba(31, 29, 77, 0.3);
+  transform: perspective(1500px) rotateY(-1.5deg);
+}
+
+.skill-demo-bar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.035);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 8px;
+  letter-spacing: 0.13em;
+}
+
+.skill-demo-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-demo-status i,
+.skill-companion small i {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  background: #7fe5b2;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(127, 229, 178, 0.72);
+}
+
+.skill-demo-body {
+  min-height: 660px;
+  display: grid;
+  grid-template-columns: minmax(245px, 0.72fr) minmax(380px, 1.28fr);
+}
+
+.skill-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  background: #0d1329;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-tab {
+  position: relative;
+  min-height: 102px;
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: start;
+  gap: 12px;
+  padding: 15px;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 200ms ease, color 200ms ease, background 200ms ease, border-color 200ms ease;
+}
+
+.skill-tab:hover,
+.skill-tab:focus-visible {
+  color: #fff;
+  border-color: rgba(139, 125, 255, 0.78);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.skill-tab[aria-pressed="true"] {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(139, 125, 255, 0.28), rgba(118, 214, 247, 0.08));
+  border-color: rgba(139, 125, 255, 0.88);
+  box-shadow: inset 0 0 0 1px rgba(139, 125, 255, 0.18);
+}
+
+.skill-tab > i {
+  color: var(--gold);
+  font-style: normal;
+  font-size: 12px;
+}
+
+.skill-tab-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: linear-gradient(135deg, var(--gold), #fff1c7);
+  border-radius: 11px;
+  font-family: Georgia, serif;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+.skill-tab-copy strong,
+.skill-tab-copy small {
+  display: block;
+}
+
+.skill-tab-copy strong {
+  margin: 2px 0 7px;
+  font-size: 12px;
+}
+
+.skill-tab-copy small {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.skill-add {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding: 14px 15px;
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+}
+
+.skill-add > span {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 11px;
+  font-size: 18px;
+}
+
+.skill-add strong,
+.skill-add small {
+  display: block;
+}
+
+.skill-add strong {
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 11px;
+}
+
+.skill-add small {
+  font-size: 8px;
+}
+
+.skill-chat {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background:
+    radial-gradient(circle at 86% 0%, rgba(139, 125, 255, 0.2), transparent 34%),
+    linear-gradient(150deg, #121a38, #0b1023);
+}
+
+.skill-chat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-companion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skill-avatar,
+.skill-message-avatar {
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: linear-gradient(135deg, #fffdf8, #d8eaff);
+  border-radius: 50%;
+  font-family: "STSong", "Songti SC", serif;
+}
+
+.skill-avatar {
+  width: 44px;
+  height: 44px;
+  font-size: 16px;
+}
+
+.skill-companion strong,
+.skill-companion small {
+  display: block;
+}
+
+.skill-companion strong {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.skill-companion small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 8px;
+}
+
+.skill-active-badge {
+  padding: 9px 12px;
+  color: #e8e4ff;
+  background: rgba(139, 125, 255, 0.16);
+  border: 1px solid rgba(139, 125, 255, 0.46);
+  border-radius: 999px;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+}
+
+.skill-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  padding: 32px 0;
+  animation: skill-message-in 280ms ease both;
+}
+
+@keyframes skill-message-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.skill-role-note {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 15px;
+  color: rgba(255, 255, 255, 0.56);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+}
+
+.skill-role-note > span {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 32px;
+  color: var(--ink);
+  background: var(--gold);
+  border-radius: 9px;
+  font-family: Georgia, serif;
+  font-size: 8px;
+}
+
+.skill-role-note p {
+  margin: 0;
+  font-size: 9px;
+  line-height: 1.65;
+}
+
+.skill-role-note strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #fff;
+  font-size: 11px;
+}
+
+.skill-message {
+  max-width: 82%;
+  margin: 0;
+  padding: 15px 17px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.skill-message-user {
+  align-self: flex-end;
+  color: var(--ink);
+  background: #f2efff;
+  border-radius: 17px 17px 4px 17px;
+}
+
+.skill-message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.skill-message-avatar {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  font-size: 10px;
+}
+
+.skill-message-companion {
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 17px 17px 17px 4px;
+}
+
+.skill-composer {
+  height: 56px;
+  display: grid;
+  grid-template-columns: auto 1fr 34px;
+  align-items: center;
+  gap: 13px;
+  padding: 0 11px 0 16px;
+  color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 17px;
+}
+
+.skill-composer > span {
+  padding-right: 13px;
+  color: var(--gold);
+  border-right: 1px solid rgba(255, 255, 255, 0.11);
+  font-size: 9px;
+}
+
+.skill-composer p {
+  margin: 0;
+  font-size: 9px;
+}
+
+.skill-composer > i {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--gold);
+  border-radius: 11px;
+  font-style: normal;
+  font-weight: 800;
 }
 
 .personality-section {
@@ -1669,6 +2156,7 @@ main {
   }
 
   .daily-section,
+  .skills-section,
   .personality-section,
   .memory-section {
     grid-template-columns: 1fr 1fr;
@@ -1676,6 +2164,24 @@ main {
 
   .feature-item {
     padding-inline: 22px;
+  }
+
+  .skills-section {
+    grid-template-columns: minmax(300px, 0.68fr) minmax(560px, 1.32fr);
+    gap: 38px;
+    padding-inline: 28px;
+  }
+
+  .skill-demo-body {
+    grid-template-columns: 225px minmax(360px, 1fr);
+  }
+
+  .skill-tabs {
+    padding: 17px;
+  }
+
+  .skill-tab {
+    padding: 12px;
   }
 
   .travel-gallery {
@@ -1767,6 +2273,7 @@ main {
   }
 
   .manifesto,
+  .skills-section,
   .travel-section,
   .film-section,
   .faq-section {
@@ -1810,6 +2317,40 @@ main {
 
   .desktop-scene {
     justify-self: center;
+  }
+
+  .skills-section {
+    grid-template-columns: 1fr;
+    gap: 70px;
+    padding-block: 120px;
+  }
+
+  .skills-copy {
+    max-width: 720px;
+  }
+
+  .skill-demo {
+    transform: none;
+  }
+
+  .skill-demo-body {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .skill-add {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+
+  .skill-chat {
+    min-height: 540px;
   }
 
   .personality-visual {
@@ -1952,6 +2493,7 @@ main {
 
   .manifesto h2,
   .daily-copy h2,
+  .skills-copy h2,
   .personality-copy h2,
   .memory-copy h2,
   .travel-heading h2,
@@ -1985,6 +2527,102 @@ main {
 
   .daily-section {
     padding-inline: 22px;
+  }
+
+  .skills-section {
+    padding: 108px 20px;
+  }
+
+  .skills-signal {
+    top: 46px;
+    font-size: 105px;
+  }
+
+  .skills-copy h2 {
+    margin-top: 45px;
+  }
+
+  .skills-lead {
+    font-size: 14px;
+  }
+
+  .skill-demo {
+    border-radius: 20px;
+  }
+
+  .skill-demo-bar {
+    height: 46px;
+    padding-inline: 15px;
+    font-size: 7px;
+  }
+
+  .skill-demo-status {
+    display: none;
+  }
+
+  .skill-tabs {
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+    padding: 14px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+  }
+
+  .skill-tab {
+    min-height: 152px;
+    flex: 0 0 166px;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+  }
+
+  .skill-tab > i {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+  }
+
+  .skill-tab-copy strong {
+    margin-top: 4px;
+  }
+
+  .skill-add {
+    min-height: 152px;
+    flex: 0 0 154px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .skill-chat {
+    min-height: 520px;
+    padding: 18px;
+  }
+
+  .skill-chat-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .skill-messages {
+    padding-block: 24px;
+  }
+
+  .skill-message {
+    max-width: 92%;
+  }
+
+  .skill-composer {
+    grid-template-columns: auto 1fr 32px;
+    gap: 9px;
+    padding-left: 11px;
+  }
+
+  .skill-composer > span {
+    padding-right: 8px;
   }
 
   .moment-list > div {

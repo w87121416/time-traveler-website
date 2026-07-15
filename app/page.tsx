@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { withBasePath } from "./site-config";
+import SkillShowcase from "./skill-showcase";
 
 const featureMoments = [
   {
@@ -14,8 +15,8 @@ const featureMoments = [
   },
   {
     number: "03",
-    title: "角色成长",
-    text: "不同性格、动作与表达方式，在一次次相处中，慢慢长成只属于你的默契。",
+    title: "技能身份",
+    text: "在聊天框添加不同 Skill，让同一位伙伴切换成学习搭子、旅行向导或故事角色。",
   },
   {
     number: "04",
@@ -76,6 +77,11 @@ const faqs = [
       "它会常驻桌面，陪你工作、学习、游戏与追剧；也会通过动作、对话与情绪反馈，回应不同的日常时刻。",
   },
   {
+    question: "Skill 会怎样改变旅伴？",
+    answer:
+      "旅伴本身不会被替换。你可以在 AI 聊天框中添加或切换 Skill，让它进入专注搭档、旅行向导、故事角色等不同身份，并使用对应的能力与说话方式陪伴你。",
+  },
+  {
     question: "之后还会有更多角色吗？",
     answer:
       "会。更多设定、性格与外观风格不同的伙伴将随版本陆续加入，你可以选择更适合自己的陪伴方式。",
@@ -111,6 +117,7 @@ export default function Home() {
           <nav className="nav-links" aria-label="主导航">
             <a href="#companion">认识旅伴</a>
             <a href="#daily">陪伴日常</a>
+            <a href="#skills">技能玩法</a>
             <a href="#travel">旅行回忆</a>
             <a href="#film">观看影片</a>
           </nav>
@@ -254,6 +261,29 @@ export default function Home() {
         </figure>
       </section>
 
+      {/* Skill 系统：旅伴不变，通过聊天框切换这一次相处的身份与能力。 */}
+      <section className="skills-section" id="skills">
+        <div className="skills-signal" aria-hidden="true">SKILLS</div>
+        <div className="skills-copy">
+          <div className="section-kicker">
+            <span>03</span>
+            <p>为聊天添加不同 Skill</p>
+          </div>
+          <h2>同一个它，<br /><em>不止一种陪伴方式。</em></h2>
+          <p className="skills-lead">
+            在 AI 聊天框里添加 Skill，让熟悉的旅伴随时切换身份、能力与说话方式。需要专注时，它是你的搭档；想进入故事时，它也可以成为向导、倾听者或冒险同伴。
+          </p>
+          <div className="skills-principle">
+            <span>01</span><p>选择或添加 Skill</p><i />
+            <span>02</span><p>旅伴进入对应身份</p><i />
+            <span>03</span><p>开始新的相处方式</p>
+          </div>
+          <p className="skills-note"><i /> 旅伴不变，Skill 改变这一次相处的方式。</p>
+        </div>
+
+        <SkillShowcase />
+      </section>
+
       <section className="personality-section">
         <div className="personality-visual">
           <div className="profile-label">
@@ -271,7 +301,7 @@ export default function Home() {
         </div>
         <div className="personality-copy">
           <div className="section-kicker">
-            <span>03</span>
+            <span>04</span>
             <p>每一种陪伴，都有自己的性格</p>
           </div>
           <h2>不是标准答案，<br />是独一份的相处方式。</h2>
@@ -306,7 +336,7 @@ export default function Home() {
           </div>
         </div>
         <div className="memory-copy">
-          <span className="memory-index">04 / MEMORY</span>
+          <span className="memory-index">05 / MEMORY</span>
           <h2>相处越久，<br />故事越长。</h2>
           <p>
             动作反馈、情绪连接与日常小事会一点点沉淀下来。你们共享的不只是屏幕前的此刻，还有一册不断长大的共同记忆。
@@ -324,7 +354,7 @@ export default function Home() {
         <div className="travel-night-bg" aria-hidden="true" />
         <div className="travel-heading">
           <div className="section-kicker section-kicker-dark">
-            <span>05</span>
+            <span>06</span>
             <p>旅行、收集与共同经历</p>
           </div>
           <h2>它会暂时离开，<br /><em>也会带着故事回来。</em></h2>
@@ -357,7 +387,7 @@ export default function Home() {
       <section className="film-section" id="film">
         <div className="film-heading">
           <div className="section-kicker">
-            <span>06</span>
+            <span>07</span>
             <p>看见一段正在发生的陪伴</p>
           </div>
           <h2>有些陪伴，<br />看过以后就会明白。</h2>
@@ -366,7 +396,7 @@ export default function Home() {
         <div className="film-frame">
           <div className="film-labels" aria-hidden="true">
             <span>OFFICIAL PROMOTION VIDEO</span>
-            <span>01:17 · HD</span>
+            <span>01:17 · 1080P HD</span>
           </div>
           <video
             controls
@@ -375,7 +405,13 @@ export default function Home() {
             poster={withBasePath("/images/pv-poster.jpg")}
             aria-label="时光旅人官方宣传片"
           >
-            <source src={withBasePath("/media/time-traveler-pv.m4v")} />
+            {/* PC 优先加载 1080p 高清版；窄屏设备保留轻量版本，避免移动网络一次加载过大。 */}
+            <source
+              src={withBasePath("/media/time-traveler-pv-1080p.m4v")}
+              type="video/mp4"
+              media="(min-width: 901px)"
+            />
+            <source src={withBasePath("/media/time-traveler-pv.m4v")} type="video/mp4" />
             你的浏览器暂不支持视频播放。
           </video>
         </div>
@@ -422,7 +458,7 @@ export default function Home() {
 
       <section className="faq-section">
         <div className="faq-heading">
-          <span>FAQ / 07</span>
+          <span>FAQ / 08</span>
           <h2>关于时光旅人</h2>
           <p>先回答你可能最关心的几件事。</p>
         </div>
