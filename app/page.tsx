@@ -59,13 +59,6 @@ const travelCards = [
   },
 ];
 
-// 下载入口采用配置化结构，PC 链接确认后只需填写 url；移动端接口已预留。
-const downloadPlatforms = [
-  { id: "pc", label: "PC 版", status: "首发平台", url: "", visible: true },
-  { id: "ios", label: "iOS", status: "敬请期待", url: "", visible: false },
-  { id: "android", label: "Android", status: "敬请期待", url: "", visible: false },
-];
-
 const faqs = [
   {
     question: "时光旅人目前支持哪些平台？",
@@ -95,8 +88,6 @@ const faqs = [
 ];
 
 export default function Home() {
-  // PC 仍是主入口；iOS 与 Android 以路线图状态出现，方便后续直接接入。
-  const visiblePlatforms = downloadPlatforms;
   // CSS 背景图也需要带上 GitHub Pages 的仓库子路径。
   const pageAssetVariables = {
     "--hero-day-image": `url("${withBasePath("/images/travel-day.jpg")}")`,
@@ -117,16 +108,32 @@ export default function Home() {
           </a>
 
           <nav className="nav-links" aria-label="主导航">
-            <a href="#companion">认识旅伴</a>
-            <a href="#daily">陪伴日常</a>
-            <a href="#skills">技能玩法</a>
+            <a href={withBasePath("/about/")}>关于我们</a>
+            <a href="#daily">产品体验</a>
+            <a href="#skills">Skill</a>
             <a href="#travel">旅行回忆</a>
-            <a href="#film">观看影片</a>
+            <a href="#film">宣传片</a>
           </nav>
 
-          <a className="nav-cta" href="#download">
-            获取 PC 版 <span aria-hidden="true">↘</span>
-          </a>
+          {/* PC 下载改为顶部轻量弹层；正式地址确认后可直接替换二维码与按钮链接。 */}
+          <details className="nav-download">
+            <summary className="nav-cta" id="pc-download">
+              获取 PC 版 <span aria-hidden="true">↘</span>
+            </summary>
+            <div className="nav-download-popover">
+              <div className="nav-download-qr" aria-label="PC 下载二维码接口预留">
+                <span>时</span>
+                <small>QR 接口已预留</small>
+              </div>
+              <div className="nav-download-copy">
+                <span>PC FIRST · WINDOWS / macOS 待确认</span>
+                <strong>PC 版即将开放</strong>
+                <p>正式下载地址接入后，可在这里直接扫码或下载安装包。</p>
+                <button type="button" disabled>直接下载 · 待接入</button>
+                <a href={withBasePath("/privacy/")}>下载前阅读隐私政策 ↗</a>
+              </div>
+            </div>
+          </details>
         </header>
 
         <div className="hero-inner">
@@ -143,7 +150,7 @@ export default function Home() {
               陪你工作、学习、游戏和发呆，也在一次次回应里，和你慢慢写下共同的故事。
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#download">
+              <a className="button button-primary" href="#pc-download">
                 获取 PC 版 <span aria-hidden="true">→</span>
               </a>
               <a className="button button-ghost" href="#film">
@@ -223,20 +230,6 @@ export default function Home() {
             </article>
           ))}
         </div>
-
-        <div className="product-loop" aria-label="时光旅人的持续陪伴体验">
-          <div className="product-loop-intro">
-            <span>COMPANION LOOP</span>
-            <strong>陪伴不是一次对话，<br />而是一条持续发生的关系线。</strong>
-          </div>
-          <ol className="product-loop-track">
-            <li><span>01</span><strong>相遇</strong><small>常驻桌面</small></li>
-            <li><span>02</span><strong>回应</strong><small>动作与对话</small></li>
-            <li><span>03</span><strong>扩展</strong><small>添加不同 Skill</small></li>
-            <li><span>04</span><strong>沉淀</strong><small>共同记忆</small></li>
-            <li><span>05</span><strong>再出发</strong><small>旅行与收集</small></li>
-          </ol>
-        </div>
       </section>
 
       {/* 日常场景：用产品画面建立“它真的住在桌面”的可信感。 */}
@@ -304,11 +297,6 @@ export default function Home() {
           <p className="skills-lead">
             在 AI 聊天框里添加 Skill，让熟悉的旅伴随时切换身份、能力与说话方式。需要专注时，它是你的搭档；想进入故事时，它也可以成为向导、倾听者或冒险同伴。
           </p>
-          <div className="skills-principle">
-            <span>01</span><p>选择或添加 Skill</p><i />
-            <span>02</span><p>旅伴进入对应身份</p><i />
-            <span>03</span><p>开始新的相处方式</p>
-          </div>
           <p className="skills-note"><i /> 旅伴不变，Skill 改变这一次相处的方式。</p>
         </div>
 
@@ -412,20 +400,6 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="travel-return-card">
-          <div className="travel-return-intro">
-            <span>RETURN PACKAGE</span>
-            <h3>每次回来，<br />都不只是“旅行结束”。</h3>
-            <p>一次外出，会把新的风景、物件与话题带回桌面，让下一次相处自然接着发生。</p>
-          </div>
-          <div className="travel-return-items">
-            <article><span>01</span><strong>看见的</strong><p>成为一张可以收藏的照片。</p></article>
-            <article><span>02</span><strong>带回的</strong><p>成为桌面里留下的纪念品。</p></article>
-            <article><span>03</span><strong>想说的</strong><p>成为只讲给你的旅行见闻。</p></article>
-          </div>
-          <blockquote>“我回来了。这次有很多事，想慢慢讲给你听。”</blockquote>
-        </div>
-
         <div className="travel-ticker" aria-hidden="true">
           <span>PHOTO</span><i />
           <span>SOUVENIR</span><i />
@@ -443,78 +417,44 @@ export default function Home() {
           <h2>有些陪伴，<br />看过以后就会明白。</h2>
           <p>从一个动作、一次回应，到每天打开电脑时的那份期待。</p>
         </div>
-        <div className="film-frame">
-          <div className="film-labels" aria-hidden="true">
-            <span>OFFICIAL PROMOTION VIDEO</span>
-            <span>01:17 · 1080P HD</span>
+        <div className="film-media-grid">
+          <div className="film-frame">
+            <div className="film-labels" aria-hidden="true">
+              <span>OFFICIAL PROMOTION VIDEO</span>
+              <span>01:17 · 1080P HD</span>
+            </div>
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster={withBasePath("/images/pv-poster.jpg")}
+              aria-label="时光旅人官方宣传片"
+            >
+              {/* PC 优先加载 1080p 高清版；窄屏设备保留轻量版本，避免移动网络一次加载过大。 */}
+              <source
+                src={withBasePath("/media/time-traveler-pv-1080p.m4v")}
+                type="video/mp4"
+                media="(min-width: 901px)"
+              />
+              <source src={withBasePath("/media/time-traveler-pv.m4v")} type="video/mp4" />
+              你的浏览器暂不支持视频播放。
+            </video>
           </div>
-          <video
-            controls
-            playsInline
-            preload="metadata"
-            poster={withBasePath("/images/pv-poster.jpg")}
-            aria-label="时光旅人官方宣传片"
-          >
-            {/* PC 优先加载 1080p 高清版；窄屏设备保留轻量版本，避免移动网络一次加载过大。 */}
-            <source
-              src={withBasePath("/media/time-traveler-pv-1080p.m4v")}
-              type="video/mp4"
-              media="(min-width: 901px)"
+
+          <figure className="film-playtest-poster">
+            <img
+              src={withBasePath("/images/desktop-playtest-poster.jpg")}
+              alt="时光旅人桌面陪伴测试海报"
+              width="748"
+              height="896"
+              loading="lazy"
             />
-            <source src={withBasePath("/media/time-traveler-pv.m4v")} type="video/mp4" />
-            你的浏览器暂不支持视频播放。
-          </video>
-        </div>
-        <div className="film-experience" aria-label="宣传片中的产品体验">
-          <article><span>01</span><strong>桌面存在</strong><p>打开电脑时，它已经在那里。</p></article>
-          <article><span>02</span><strong>智能互动</strong><p>动作、对话与情绪形成回应。</p></article>
-          <article><span>03</span><strong>Skill 身份</strong><p>同一旅伴，进入不同相处方式。</p></article>
-          <article><span>04</span><strong>共同经历</strong><p>记忆、旅行和收集继续生长。</p></article>
-        </div>
-      </section>
-
-      {/* 下载区：PC 为当前主入口；二维码与直链均等待正式地址，避免无效跳转。 */}
-      <section className="download-section" id="download">
-        <div className="download-orbit" aria-hidden="true" />
-        <div className="download-copy">
-          <span className="download-kicker">YOUR NEXT EVERYDAY</span>
-          <h2>下一段日常，<br />从桌面开始。</h2>
-          <p>PC 版首发。正式下载链接确认后，这里将同时提供一键下载与跨设备扫码。</p>
-          <div className="platform-row">
-            {visiblePlatforms.map((platform) => (
-              <div
-                className={`platform-pill ${platform.id === "pc" ? "platform-pill-active" : "platform-pill-roadmap"}`}
-                key={platform.id}
-              >
-                <span className="platform-icon" aria-hidden="true">▣</span>
-                <div><strong>{platform.label}</strong><small>{platform.status}</small></div>
-              </div>
-            ))}
-          </div>
-          <button className="download-button" type="button" disabled>
-            PC 下载链接待接入 <span aria-hidden="true">→</span>
-          </button>
-          <small className="download-hint">
-            Windows / macOS 支持范围将在正式版本确认后标注 · <a href={withBasePath("/privacy/")}>使用前请阅读隐私政策</a>
-          </small>
-          <div className="download-steps" aria-label="开始使用时光旅人的步骤">
-            <div><span>01</span><p><strong>获取 PC 版</strong><small>下载入口确认后开放</small></p></div>
-            <div><span>02</span><p><strong>遇见你的旅伴</strong><small>选择角色与相处方式</small></p></div>
-            <div><span>03</span><p><strong>让它住进桌面</strong><small>从下一次开机开始陪伴</small></p></div>
-          </div>
-        </div>
-
-        <div className="qr-card">
-          <div className="qr-header">
-            <span>PC DOWNLOAD</span>
-            <span>COMING SOON</span>
-          </div>
-          <div className="qr-placeholder" aria-label="PC 下载二维码预留位置">
-            <div className="release-orbit" aria-hidden="true"><i /><i /><i /><span>时</span></div>
-            <small>PC RELEASE SLOT</small>
-          </div>
-          <strong>PC 版即将开放</strong>
-          <p>下载地址确认后，此处会切换为真实二维码与一键下载。</p>
+            <figcaption>
+              <span>PLAYTEST POSTER · 2026</span>
+              <strong>一位真正住进桌面的旅伴</strong>
+              <p>桌面存在 · 智能互动 · Skill 身份 · 共同记忆</p>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -551,6 +491,7 @@ export default function Home() {
         </div>
         <div className="footer-meta">
           <div className="footer-links">
+            <a href={withBasePath("/about/")}>关于我们 ↗</a>
             <a href={withBasePath("/privacy/")}>隐私政策 ↗</a>
             <a href="#top">返回顶部 ↑</a>
           </div>
