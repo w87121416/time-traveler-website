@@ -124,7 +124,7 @@ main {
   background:
     linear-gradient(90deg, rgba(8, 11, 24, 0.98) 0%, rgba(8, 11, 24, 0.88) 38%, rgba(8, 11, 24, 0.26) 75%, rgba(8, 11, 24, 0.1) 100%),
     radial-gradient(circle at 80% 18%, rgba(255, 201, 112, 0.28), transparent 34%),
-    url("/images/travel-day.jpg") center / cover;
+    var(--hero-day-image) center / cover;
 }
 
 .hero::after {
@@ -417,7 +417,7 @@ main {
   height: calc(100% - 52px);
   background:
     linear-gradient(180deg, rgba(8, 11, 24, 0.04), rgba(8, 11, 24, 0.46)),
-    url("/images/travel-day.jpg") center / cover;
+    var(--hero-day-image) center / cover;
   filter: saturate(0.86);
 }
 
@@ -1059,7 +1059,7 @@ main {
   background:
     linear-gradient(180deg, rgba(8, 11, 24, 0.2), var(--ink) 100%),
     linear-gradient(90deg, rgba(8, 11, 24, 0.9), rgba(8, 11, 24, 0.2)),
-    url("/images/travel-night.jpg") center / cover;
+    var(--travel-night-image) center / cover;
   opacity: 0.68;
 }
 

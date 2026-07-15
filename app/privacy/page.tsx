@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { absoluteSiteUrl, withBasePath } from "../site-config";
 
 export const metadata: Metadata = {
   title: "隐私政策｜时光旅人",
   description:
     "时光旅人官网与 PC 桌面陪伴游戏隐私政策预发布草案，说明个人信息、系统权限、AI 服务与用户权利。",
   alternates: {
-    canonical: "/privacy",
+    canonical: absoluteSiteUrl("/privacy/"),
   },
   // 当前仍需补齐运营主体和真实数据清单，正式审定前不进入搜索索引。
   robots: {
@@ -15,10 +16,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "隐私政策｜时光旅人",
     description: "了解时光旅人如何处理个人信息、系统权限与 AI 交互数据。",
-    url: "/privacy",
+    url: absoluteSiteUrl("/privacy/"),
     images: [
       {
-        url: "/og.png",
+        url: absoluteSiteUrl("/og.png"),
         width: 1732,
         height: 908,
         alt: "时光旅人隐私政策",
@@ -55,12 +56,12 @@ export default function PrivacyPage() {
     <main className="privacy-page">
       {/* 隐私页沿用主站品牌识别，但收敛动效与装饰，优先保证长文可读性。 */}
       <header className="privacy-nav">
-        <a className="privacy-brand" href="/" aria-label="返回时光旅人官网">
+        <a className="privacy-brand" href={withBasePath("/")} aria-label="返回时光旅人官网">
           <span className="brand-mark" aria-hidden="true"><i /></span>
           <span>时光旅人</span>
         </a>
         <span className="privacy-status">预发布草案</span>
-        <a className="privacy-back" href="/">返回官网 <span aria-hidden="true">↗</span></a>
+        <a className="privacy-back" href={withBasePath("/")}>返回官网 <span aria-hidden="true">↗</span></a>
       </header>
 
       <section className="privacy-hero">
@@ -351,7 +352,7 @@ export default function PrivacyPage() {
           <strong>时光旅人</strong>
         </div>
         <p>隐私不是一段隐藏的小字，而是产品与用户之间长期的信任。</p>
-        <a href="/">返回官网 ↑</a>
+        <a href={withBasePath("/")}>返回官网 ↑</a>
       </footer>
     </main>
   );

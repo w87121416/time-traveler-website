@@ -1,3 +1,6 @@
+import type { CSSProperties } from "react";
+import { withBasePath } from "./site-config";
+
 const featureMoments = [
   {
     number: "01",
@@ -86,9 +89,14 @@ const faqs = [
 
 export default function Home() {
   const visiblePlatforms = downloadPlatforms.filter((platform) => platform.visible);
+  // CSS 背景图也需要带上 GitHub Pages 的仓库子路径。
+  const pageAssetVariables = {
+    "--hero-day-image": `url("${withBasePath("/images/travel-day.jpg")}")`,
+    "--travel-night-image": `url("${withBasePath("/images/travel-night.jpg")}")`,
+  } as CSSProperties;
 
   return (
-    <main>
+    <main style={pageAssetVariables}>
       {/* 首屏：让角色成为品牌主角，而不是普通产品配图。 */}
       <section className="hero" id="top">
         <div className="hero-sky" aria-hidden="true" />
@@ -152,7 +160,7 @@ export default function Home() {
             <div className="character-halo" aria-hidden="true" />
             <img
               className="hero-character"
-              src="/images/companion-hero.png"
+              src={withBasePath("/images/companion-hero.png")}
               alt="银发白衣的时光旅人桌面伙伴"
               width="1047"
               height="1800"
@@ -233,7 +241,7 @@ export default function Home() {
             <span>在线 · 正在陪伴</span>
           </div>
           <img
-            src="/images/companion-scene.jpg"
+            src={withBasePath("/images/companion-scene.jpg")}
             alt="桌面场景中的时光旅人角色"
             width="1445"
             height="1700"
@@ -253,7 +261,7 @@ export default function Home() {
             <strong>旅伴档案 · 01</strong>
           </div>
           <img
-            src="/images/companion-turnaround.jpg"
+            src={withBasePath("/images/companion-turnaround.jpg")}
             alt="时光旅人角色正面、侧面和背面设定"
             width="1039"
             height="1500"
@@ -286,7 +294,7 @@ export default function Home() {
       <section className="memory-section">
         <div className="memory-image-wrap">
           <img
-            src="/images/aquarium-memory.jpg"
+            src={withBasePath("/images/aquarium-memory.jpg")}
             alt="角色在水族馆与金鱼相遇的旅行画面"
             width="1672"
             height="940"
@@ -329,7 +337,7 @@ export default function Home() {
           {travelCards.map((card, index) => (
             <figure className={card.className} key={card.image}>
               <span className="photo-number">0{index + 1}</span>
-              <img src={card.image} alt={card.title} loading="lazy" />
+              <img src={withBasePath(card.image)} alt={card.title} loading="lazy" />
               <figcaption>
                 <strong>{card.title}</strong>
                 <span>{card.meta}</span>
@@ -364,10 +372,10 @@ export default function Home() {
             controls
             playsInline
             preload="metadata"
-            poster="/images/pv-poster.jpg"
+            poster={withBasePath("/images/pv-poster.jpg")}
             aria-label="时光旅人官方宣传片"
           >
-            <source src="/media/time-traveler-pv.m4v" />
+            <source src={withBasePath("/media/time-traveler-pv.m4v")} />
             你的浏览器暂不支持视频播放。
           </video>
         </div>
@@ -392,7 +400,7 @@ export default function Home() {
             PC 下载链接待接入 <span aria-hidden="true">→</span>
           </button>
           <small className="download-hint">
-            Windows / macOS 支持范围将在正式版本确认后标注 · <a href="/privacy">使用前请阅读隐私政策</a>
+            Windows / macOS 支持范围将在正式版本确认后标注 · <a href={withBasePath("/privacy/")}>使用前请阅读隐私政策</a>
           </small>
         </div>
 
@@ -440,7 +448,7 @@ export default function Home() {
         </div>
         <div className="footer-meta">
           <div className="footer-links">
-            <a href="/privacy">隐私政策 ↗</a>
+            <a href={withBasePath("/privacy/")}>隐私政策 ↗</a>
             <a href="#top">返回顶部 ↑</a>
           </div>
           <p>下载或使用产品前，请先阅读并了解隐私政策。</p>

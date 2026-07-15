@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  // GitHub Pages 只构建静态官网；这些目录属于原托管运行时，不进入本次类型检查。
+  "exclude": [
+    "node_modules",
+    "build",
+    "db",
+    "examples",
+    "worker",
+    "drizzle.config.ts",
+    "vite.config.ts"
+  ]
+}
