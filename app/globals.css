@@ -1399,6 +1399,11 @@ main {
   font-size: 9px;
 }
 
+.download-hint a {
+  color: rgba(255, 255, 255, 0.68);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+}
+
 .qr-card {
   padding: 24px 28px 30px;
   color: var(--ink);
@@ -1608,9 +1613,16 @@ main {
   text-align: right;
 }
 
-.footer-meta a {
-  display: inline-block;
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 22px;
   margin-bottom: 44px;
+}
+
+.footer-links a {
+  display: inline-block;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.45);
   font-size: 12px;
@@ -2084,6 +2096,10 @@ main {
 
   .footer-meta {
     text-align: left;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
   }
 }
 

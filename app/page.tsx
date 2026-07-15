@@ -391,7 +391,9 @@ export default function Home() {
           <button className="download-button" type="button" disabled>
             PC 下载链接待接入 <span aria-hidden="true">→</span>
           </button>
-          <small className="download-hint">Windows / macOS 支持范围将在正式版本确认后标注</small>
+          <small className="download-hint">
+            Windows / macOS 支持范围将在正式版本确认后标注 · <a href="/privacy">使用前请阅读隐私政策</a>
+          </small>
         </div>
 
         <div className="qr-card">
@@ -437,8 +439,11 @@ export default function Home() {
           <p>让桌面，多一位懂你的旅伴。</p>
         </div>
         <div className="footer-meta">
-          <a href="#top">返回顶部 ↑</a>
-          <p>产品说明与隐私条款将在正式口径确认后接入。</p>
+          <div className="footer-links">
+            <a href="/privacy">隐私政策 ↗</a>
+            <a href="#top">返回顶部 ↑</a>
+          </div>
+          <p>下载或使用产品前，请先阅读并了解隐私政策。</p>
           <span>© 2026 TIME TRAVELER</span>
         </div>
       </footer>

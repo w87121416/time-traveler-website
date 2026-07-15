@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
+import "./privacy/privacy.css";
 
 // 根据访问域名生成绝对分享地址，部署到新域名后无需手动修改社交卡片链接。
 export async function generateMetadata(): Promise<Metadata> {
