@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { withBasePath } from "./site-config";
+import CompanionProfile from "./companion-profile";
 import SkillShowcase from "./skill-showcase";
 
 const featureMoments = [
@@ -94,7 +95,8 @@ const faqs = [
 ];
 
 export default function Home() {
-  const visiblePlatforms = downloadPlatforms.filter((platform) => platform.visible);
+  // PC 仍是主入口；iOS 与 Android 以路线图状态出现，方便后续直接接入。
+  const visiblePlatforms = downloadPlatforms;
   // CSS 背景图也需要带上 GitHub Pages 的仓库子路径。
   const pageAssetVariables = {
     "--hero-day-image": `url("${withBasePath("/images/travel-day.jpg")}")`,
@@ -221,6 +223,20 @@ export default function Home() {
             </article>
           ))}
         </div>
+
+        <div className="product-loop" aria-label="时光旅人的持续陪伴体验">
+          <div className="product-loop-intro">
+            <span>COMPANION LOOP</span>
+            <strong>陪伴不是一次对话，<br />而是一条持续发生的关系线。</strong>
+          </div>
+          <ol className="product-loop-track">
+            <li><span>01</span><strong>相遇</strong><small>常驻桌面</small></li>
+            <li><span>02</span><strong>回应</strong><small>动作与对话</small></li>
+            <li><span>03</span><strong>扩展</strong><small>添加不同 Skill</small></li>
+            <li><span>04</span><strong>沉淀</strong><small>共同记忆</small></li>
+            <li><span>05</span><strong>再出发</strong><small>旅行与收集</small></li>
+          </ol>
+        </div>
       </section>
 
       {/* 日常场景：用产品画面建立“它真的住在桌面”的可信感。 */}
@@ -240,6 +256,11 @@ export default function Home() {
             <div><span>15:08</span><p>发现你在摸鱼，忍不住来搭话。</p></div>
             <div><span>23:47</span><p>夜已经深了，它还在桌面等你。</p></div>
           </div>
+          <div className="daily-proof-row" aria-label="桌面陪伴能力">
+            <span><i /> 动作反馈</span>
+            <span><i /> 情绪回应</span>
+            <span><i /> 日常陪伴</span>
+          </div>
         </div>
 
         <figure className="desktop-scene">
@@ -254,6 +275,16 @@ export default function Home() {
             height="1700"
             loading="lazy"
           />
+          <div className="scene-reaction-card">
+            <small>COMPANION STATUS</small>
+            <strong>安静守候</strong>
+            <span><i /> 等你忙完，再来和你说话</span>
+          </div>
+          <div className="scene-pulse-card" aria-hidden="true">
+            <span>回应节奏</span>
+            <div><i /><i /><i /><i /><i /><i /></div>
+            <small>SOFT</small>
+          </div>
           <figcaption>
             <span>日常模式</span>
             <p>“我会安静一点。等你忙完，再和我说说今天吧。”</p>
@@ -284,20 +315,10 @@ export default function Home() {
         <SkillShowcase />
       </section>
 
+      {/* 角色档案使用正式立绘与可交互性格信号，替代制作阶段的三视图原型稿。 */}
       <section className="personality-section">
         <div className="personality-visual">
-          <div className="profile-label">
-            <span>TRAVELER FILE</span>
-            <strong>旅伴档案 · 01</strong>
-          </div>
-          <img
-            src={withBasePath("/images/companion-turnaround.jpg")}
-            alt="时光旅人角色正面、侧面和背面设定"
-            width="1039"
-            height="1500"
-            loading="lazy"
-          />
-          <div className="profile-coordinate" aria-hidden="true">31°14&apos;N · 118°22&apos;E</div>
+          <CompanionProfile />
         </div>
         <div className="personality-copy">
           <div className="section-kicker">
@@ -306,7 +327,7 @@ export default function Home() {
           </div>
           <h2>不是标准答案，<br />是独一份的相处方式。</h2>
           <p>
-            活泼、安静、古灵精怪，或来自奇幻世界。不同角色拥有各自的动作、表达与成长体验，你可以选择更适合自己的那一位。
+            昭昭是你遇见的第一位旅伴。她并不是一张固定立绘，而会在安静守候、主动搭话与带着记忆回应之间，形成属于你们的相处节奏。
           </p>
           <div className="personality-tags" aria-label="角色性格示例">
             <span>安静守候</span>
@@ -317,7 +338,7 @@ export default function Home() {
           <blockquote>
             “有时我会主动和你说话；有时，我只是想安静地待在你身边。”
           </blockquote>
-          <p className="future-note">更多角色与设定，将随版本持续加入。</p>
+          <p className="future-note">昭昭 · 首位旅伴 / 更多角色与设定将随版本持续加入。</p>
         </div>
       </section>
 
@@ -330,6 +351,20 @@ export default function Home() {
             height="940"
             loading="lazy"
           />
+          <div className="memory-fragments" aria-label="共同记忆中的照片碎片">
+            <figure>
+              <img src={withBasePath("/images/travel-pavilion.jpg")} alt="旅途中经过的水榭" loading="lazy" />
+              <figcaption>远行 · 01</figcaption>
+            </figure>
+            <figure>
+              <img src={withBasePath("/images/travel-canal.jpg")} alt="旅途中经过的水巷" loading="lazy" />
+              <figcaption>远行 · 02</figcaption>
+            </figure>
+            <figure>
+              <img src={withBasePath("/images/travel-lake.jpg")} alt="旅途中看见的湖面" loading="lazy" />
+              <figcaption>远行 · 03</figcaption>
+            </figure>
+          </div>
           <div className="memory-photo-meta">
             <span>旅途回忆 · 18:42</span>
             <p>“玻璃后面的光像水一样。下次，也想和你一起看。”</p>
@@ -342,10 +377,11 @@ export default function Home() {
             动作反馈、情绪连接与日常小事会一点点沉淀下来。你们共享的不只是屏幕前的此刻，还有一册不断长大的共同记忆。
           </p>
           <div className="memory-counter">
-            <div><strong>照片</strong><span>旅途中看见的风景</span></div>
-            <div><strong>纪念品</strong><span>带回桌面的惊喜</span></div>
-            <div><strong>见闻</strong><span>只讲给你的故事</span></div>
+            <div><i>01</i><strong>照片</strong><span>旅途中看见的风景</span></div>
+            <div><i>02</i><strong>纪念品</strong><span>带回桌面的惊喜</span></div>
+            <div><i>03</i><strong>见闻</strong><span>只讲给你的故事</span></div>
           </div>
+          <p className="memory-footnote"><i /> 每一次回应，都可能成为下一段故事的开头。</p>
         </div>
       </section>
 
@@ -374,6 +410,20 @@ export default function Home() {
               </figcaption>
             </figure>
           ))}
+        </div>
+
+        <div className="travel-return-card">
+          <div className="travel-return-intro">
+            <span>RETURN PACKAGE</span>
+            <h3>每次回来，<br />都不只是“旅行结束”。</h3>
+            <p>一次外出，会把新的风景、物件与话题带回桌面，让下一次相处自然接着发生。</p>
+          </div>
+          <div className="travel-return-items">
+            <article><span>01</span><strong>看见的</strong><p>成为一张可以收藏的照片。</p></article>
+            <article><span>02</span><strong>带回的</strong><p>成为桌面里留下的纪念品。</p></article>
+            <article><span>03</span><strong>想说的</strong><p>成为只讲给你的旅行见闻。</p></article>
+          </div>
+          <blockquote>“我回来了。这次有很多事，想慢慢讲给你听。”</blockquote>
         </div>
 
         <div className="travel-ticker" aria-hidden="true">
@@ -415,6 +465,12 @@ export default function Home() {
             你的浏览器暂不支持视频播放。
           </video>
         </div>
+        <div className="film-experience" aria-label="宣传片中的产品体验">
+          <article><span>01</span><strong>桌面存在</strong><p>打开电脑时，它已经在那里。</p></article>
+          <article><span>02</span><strong>智能互动</strong><p>动作、对话与情绪形成回应。</p></article>
+          <article><span>03</span><strong>Skill 身份</strong><p>同一旅伴，进入不同相处方式。</p></article>
+          <article><span>04</span><strong>共同经历</strong><p>记忆、旅行和收集继续生长。</p></article>
+        </div>
       </section>
 
       {/* 下载区：PC 为当前主入口；二维码与直链均等待正式地址，避免无效跳转。 */}
@@ -426,7 +482,10 @@ export default function Home() {
           <p>PC 版首发。正式下载链接确认后，这里将同时提供一键下载与跨设备扫码。</p>
           <div className="platform-row">
             {visiblePlatforms.map((platform) => (
-              <div className="platform-pill" key={platform.id}>
+              <div
+                className={`platform-pill ${platform.id === "pc" ? "platform-pill-active" : "platform-pill-roadmap"}`}
+                key={platform.id}
+              >
                 <span className="platform-icon" aria-hidden="true">▣</span>
                 <div><strong>{platform.label}</strong><small>{platform.status}</small></div>
               </div>
@@ -438,6 +497,11 @@ export default function Home() {
           <small className="download-hint">
             Windows / macOS 支持范围将在正式版本确认后标注 · <a href={withBasePath("/privacy/")}>使用前请阅读隐私政策</a>
           </small>
+          <div className="download-steps" aria-label="开始使用时光旅人的步骤">
+            <div><span>01</span><p><strong>获取 PC 版</strong><small>下载入口确认后开放</small></p></div>
+            <div><span>02</span><p><strong>遇见你的旅伴</strong><small>选择角色与相处方式</small></p></div>
+            <div><span>03</span><p><strong>让它住进桌面</strong><small>从下一次开机开始陪伴</small></p></div>
+          </div>
         </div>
 
         <div className="qr-card">
@@ -446,13 +510,11 @@ export default function Home() {
             <span>COMING SOON</span>
           </div>
           <div className="qr-placeholder" aria-label="PC 下载二维码预留位置">
-            <i className="finder finder-one" />
-            <i className="finder finder-two" />
-            <i className="finder finder-three" />
-            <span>时</span>
+            <div className="release-orbit" aria-hidden="true"><i /><i /><i /><span>时</span></div>
+            <small>PC RELEASE SLOT</small>
           </div>
-          <strong>扫描获取 PC 版</strong>
-          <p>下载地址确认后，二维码将在此自动接入。</p>
+          <strong>PC 版即将开放</strong>
+          <p>下载地址确认后，此处会切换为真实二维码与一键下载。</p>
         </div>
       </section>
 
@@ -461,6 +523,11 @@ export default function Home() {
           <span>FAQ / 08</span>
           <h2>关于时光旅人</h2>
           <p>先回答你可能最关心的几件事。</p>
+          <div className="faq-assurance">
+            <span><i /> 独立隐私说明</span>
+            <span><i /> PC 版优先上线</span>
+            <span><i /> 移动端入口已预留</span>
+          </div>
         </div>
         <div className="faq-list">
           {faqs.map((faq, index) => (
