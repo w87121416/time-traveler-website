@@ -77,7 +77,7 @@ export default function SkillShowcase() {
             <small>{skill.shortName}</small>
           </button>
         ))}
-        <button className="skill-reference-add" type="button" aria-label="未来可继续添加更多 Skill">
+        <button className="skill-reference-add" type="button" aria-label="更多 Skill 敬请期待" disabled>
           <span aria-hidden="true">＋</span>
           <small>添加</small>
         </button>

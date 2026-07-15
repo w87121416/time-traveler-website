@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { withBasePath } from "./site-config";
 import CompanionProfile from "./companion-profile";
+import { PcDownloadMenu, PcDownloadTrigger } from "./download-menu";
 import SkillShowcase from "./skill-showcase";
 
 const featureMoments = [
@@ -116,24 +117,7 @@ export default function Home() {
           </nav>
 
           {/* PC 下载改为顶部轻量弹层；正式地址确认后可直接替换二维码与按钮链接。 */}
-          <details className="nav-download">
-            <summary className="nav-cta" id="pc-download">
-              获取 PC 版 <span aria-hidden="true">↘</span>
-            </summary>
-            <div className="nav-download-popover">
-              <div className="nav-download-qr" aria-label="PC 下载二维码接口预留">
-                <span>时</span>
-                <small>QR 接口已预留</small>
-              </div>
-              <div className="nav-download-copy">
-                <span>PC FIRST · WINDOWS / macOS 待确认</span>
-                <strong>PC 版即将开放</strong>
-                <p>正式下载地址接入后，可在这里直接扫码或下载安装包。</p>
-                <button type="button" disabled>直接下载 · 待接入</button>
-                <a href={withBasePath("/privacy/")}>下载前阅读隐私政策 ↗</a>
-              </div>
-            </div>
-          </details>
+          <PcDownloadMenu />
         </header>
 
         <div className="hero-inner">
@@ -150,9 +134,7 @@ export default function Home() {
               陪你工作、学习、游戏和发呆，也在一次次回应里，和你慢慢写下共同的故事。
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#pc-download">
-                获取 PC 版 <span aria-hidden="true">→</span>
-              </a>
+              <PcDownloadTrigger />
               <a className="button button-ghost" href="#film">
                 <span className="play-dot" aria-hidden="true">▶</span> 观看宣传片
               </a>

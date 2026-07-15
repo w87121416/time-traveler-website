@@ -13,6 +13,12 @@ export const metadata: Metadata = {
     url: absoluteSiteUrl("/about/"),
     images: [absoluteSiteUrl("/og.png")],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "关于我们｜时光旅人",
+    description: "让 AI 陪伴从一段对话，变成住进日常的一段关系。",
+    images: [absoluteSiteUrl("/og.png")],
+  },
 };
 
 const productIdeas = [

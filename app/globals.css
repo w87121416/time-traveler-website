@@ -317,7 +317,9 @@ main {
   justify-content: center;
   gap: 15px;
   padding: 0 24px;
+  border: 0;
   border-radius: 999px;
+  cursor: pointer;
   font-size: 14px;
   font-weight: 700;
   transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
@@ -3831,7 +3833,7 @@ main {
 
 .nav-download-popover {
   position: absolute;
-  top: calc(100% + 16px);
+  top: calc(100% + 10px);
   right: 0;
   width: 440px;
   display: grid;
@@ -3850,6 +3852,16 @@ main {
   transform: translateY(-8px) scale(0.98);
   transform-origin: top right;
   transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
+}
+
+/* 透明桥接区避免鼠标从按钮移向弹层时短暂离开 hover 热区。 */
+.nav-download-popover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12px;
+  height: 12px;
 }
 
 .nav-download:hover .nav-download-popover,
@@ -4101,6 +4113,13 @@ main {
 
 .skill-reference-dock .skill-reference-add {
   border-style: dashed;
+}
+
+.skill-reference-dock .skill-reference-add:disabled {
+  color: rgba(255, 255, 255, 0.42);
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
 }
 
 .skill-reference-chat {
@@ -4442,15 +4461,15 @@ main {
 }
 
 .daily-section {
-  min-height: 820px;
-  padding-block: 108px;
+  min-height: 760px;
+  padding-block: 92px;
 }
 
 .skills-section {
-  min-height: 830px;
+  min-height: 760px;
   grid-template-columns: minmax(300px, 0.52fr) minmax(690px, 1.48fr);
   gap: clamp(42px, 5vw, 82px);
-  padding-block: 108px;
+  padding-block: 92px;
 }
 
 .skills-copy h2 {
@@ -4462,7 +4481,20 @@ main {
 }
 
 .personality-section {
-  min-height: 800px;
+  min-height: 740px;
+}
+
+.personality-visual {
+  padding: clamp(28px, 3vw, 46px);
+}
+
+.profile-showcase {
+  min-height: 680px;
+  grid-template-rows: minmax(400px, 1fr) auto;
+}
+
+.profile-stage {
+  min-height: 410px;
 }
 
 .personality-copy {
@@ -4475,7 +4507,7 @@ main {
 
 .memory-section,
 .memory-image-wrap {
-  min-height: 650px;
+  min-height: 600px;
 }
 
 .memory-copy {
@@ -4500,22 +4532,16 @@ main {
 }
 
 .travel-gallery {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-auto-rows: auto;
   gap: 18px;
 }
 
 .travel-card,
 .travel-card:nth-child(n) {
-  grid-column: span 2;
+  grid-column: span 1;
   grid-row: auto;
-  aspect-ratio: 1.55;
-}
-
-.travel-card:nth-child(4),
-.travel-card:nth-child(5) {
-  grid-column: span 3;
-  aspect-ratio: 2.05;
+  aspect-ratio: 1.12;
 }
 
 .travel-ticker {
@@ -4523,7 +4549,7 @@ main {
 }
 
 .film-section {
-  padding-block: 108px;
+  padding-block: 92px;
 }
 
 .film-heading {
@@ -4531,7 +4557,11 @@ main {
 }
 
 .faq-section {
-  padding-block: 100px;
+  padding-block: 84px;
+}
+
+.faq-list summary {
+  min-height: 74px;
 }
 
 .site-footer {
@@ -4938,16 +4968,23 @@ main {
     padding-bottom: 62px;
   }
 
-  .travel-card,
-  .travel-card:nth-child(n) {
-    grid-column: auto;
-    aspect-ratio: 1.5;
+  .travel-gallery {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-inline: contain;
   }
 
+  .travel-card,
+  .travel-card:nth-child(n),
   .travel-card:nth-child(1),
   .travel-card:nth-child(4) {
-    grid-column: 1 / -1;
-    aspect-ratio: 2;
+    flex: 0 0 min(44vw, 420px);
+    grid-column: auto;
+    aspect-ratio: 1.42;
+    scroll-snap-align: start;
   }
 
   .film-media-grid {
@@ -5013,6 +5050,56 @@ main {
   .about-footer {
     grid-template-columns: 1fr;
     padding-inline: 28px;
+  }
+}
+
+@media (max-width: 760px) {
+  .skill-reference {
+    min-height: 700px;
+    aspect-ratio: auto;
+    border-radius: 20px;
+  }
+
+  .skill-reference-background {
+    height: 280px;
+    object-position: 39% center;
+  }
+
+  .skill-reference-tint {
+    height: 280px;
+    bottom: auto;
+  }
+
+  .skill-reference-status small,
+  .skill-reference-caption {
+    display: none;
+  }
+
+  .skill-reference-dock {
+    left: 12px;
+    right: 12px;
+    top: 194px;
+    bottom: auto;
+    width: auto;
+    gap: 5px;
+    padding: 7px;
+  }
+
+  .skill-reference-dock button {
+    min-height: 55px;
+  }
+
+  .skill-reference-chat {
+    top: 268px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    min-width: 0;
+  }
+
+  .skill-reference-world {
+    height: 105px;
   }
 }
 
@@ -5112,13 +5199,14 @@ main {
   }
 
   .travel-gallery {
-    grid-template-columns: 1fr;
+    display: flex;
   }
 
   .travel-card,
   .travel-card:nth-child(n),
   .travel-card:nth-child(1),
   .travel-card:nth-child(4) {
+    flex-basis: 82vw;
     grid-column: auto;
     aspect-ratio: 1.55;
   }
