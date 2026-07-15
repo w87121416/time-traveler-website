@@ -20,8 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_TELEMETRY_DISABLED: 1
-      NEXT_PUBLIC_BASE_PATH: ${{ format('/{0}', github.event.repository.name) }}
-      NEXT_PUBLIC_SITE_URL: ${{ format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
+      # 自定义域名直接从根路径访问，不能再拼接仓库名称子路径。
+      NEXT_PUBLIC_BASE_PATH: ""
+      NEXT_PUBLIC_SITE_URL: https://www.sinbookey.com
     steps:
       - name: 读取官网源码
         uses: actions/checkout@v4

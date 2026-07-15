@@ -1,4 +1,4 @@
-// GitHub Pages 的项目站点带有仓库子路径；所有静态资源和站内链接统一从这里拼接。
+// 默认使用自定义域名根路径；保留环境变量入口，方便本地或备用地址构建。
 const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const basePath = rawBasePath
@@ -13,7 +13,7 @@ export function withBasePath(path: string): string {
 // 社交分享与 canonical 必须使用公开站点的绝对地址，构建时可由 GitHub Actions 覆盖。
 export const publicSiteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://w87121416.github.io/time-traveler-website"
+  "https://www.sinbookey.com"
 ).replace(/\/+$/, "");
 
 export function absoluteSiteUrl(path = "/"): string {

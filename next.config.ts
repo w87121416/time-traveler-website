@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-// GitHub Pages 的项目站点位于仓库子路径，构建时由 Actions 注入。
+// 自定义域名使用根路径；仍允许环境变量覆盖，便于预览部署。
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
