@@ -277,9 +277,9 @@ export default function Home() {
           </div>
           <h2>同一个它，<br /><em>不止一种陪伴方式。</em></h2>
           <p className="skills-lead">
-            在 AI 聊天框里添加 Skill，让熟悉的旅伴随时切换身份、能力与说话方式。需要专注时，它是你的搭档；想进入故事时，它也可以成为向导、倾听者或冒险同伴。
+            Skill 可以为当前对话载入新的能力与玩法，不会打断你和朝朝已经建立的记忆。它进入聊天后，会自然地参与理解、回应和陪伴。
           </p>
-          <p className="skills-note"><i /> 旅伴不变，Skill 改变这一次相处的方式。</p>
+          <p className="skills-note"><i /> 旅伴不变，Skill 只拓展她理解和回应你的方式。</p>
         </div>
 
         <SkillShowcase />
@@ -297,7 +297,7 @@ export default function Home() {
           </div>
           <h2>不是标准答案，<br />是独一份的相处方式。</h2>
           <p>
-            昭昭是你遇见的第一位旅伴。她并不是一张固定立绘，而会在安静守候、主动搭话与带着记忆回应之间，形成属于你们的相处节奏。
+            朝朝是你遇见的第一位旅伴。她并不是一张固定立绘，而会在安静守候、主动搭话与带着记忆回应之间，形成属于你们的相处节奏。
           </p>
           <div className="personality-tags" aria-label="角色性格示例">
             <span>安静守候</span>
@@ -308,7 +308,7 @@ export default function Home() {
           <blockquote>
             “有时我会主动和你说话；有时，我只是想安静地待在你身边。”
           </blockquote>
-          <p className="future-note">昭昭 · 首位旅伴 / 更多角色与设定将随版本持续加入。</p>
+          <p className="future-note">朝朝 · 首位旅伴 / 更多角色与设定将随版本持续加入。</p>
         </div>
       </section>
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { withBasePath } from "./site-config";
 
-// 昭昭的官网展示强调“相处方式”，不直接暴露角色制作阶段的三视图原型稿。
+// 朝朝的官网展示强调“相处方式”，不直接暴露角色制作阶段的三视图原型稿。
 const profileModes = [
   {
     id: "quiet",
@@ -12,7 +12,7 @@ const profileModes = [
     summary: "你专注时，她会把存在感放轻一点。",
     quote: "你先忙，我就在这里。等你回头的时候，我还在。",
     image: "/images/zhaozhao-profile-side.png",
-    imageAlt: "昭昭安静望向远方的侧面角色插画",
+    imageAlt: "朝朝安静望向远方的侧面角色插画",
     signals: [
       ["相处距离", "靠近但不打扰"],
       ["回应节奏", "轻声、简短"],
@@ -26,7 +26,7 @@ const profileModes = [
     summary: "发现你停下来时，她也会先开口。",
     quote: "你在这里停了一会儿。要不要和我说说，刚刚在想什么？",
     image: "/images/zhaozhao-profile-bloom.png",
-    imageAlt: "昭昭回头看向用户的水墨角色插画",
+    imageAlt: "朝朝回头看向用户的水墨角色插画",
     signals: [
       ["相处距离", "先轻轻开口"],
       ["回应节奏", "自然、有来回"],
@@ -40,7 +40,7 @@ const profileModes = [
     summary: "共同经历会慢慢进入下一次对话。",
     quote: "我还记得你说过想去看海。要把它放进下一次旅行吗？",
     image: "/images/aquarium-memory.jpg",
-    imageAlt: "昭昭在水族馆看金鱼的共同记忆",
+    imageAlt: "朝朝在水族馆看金鱼的共同记忆",
     signals: [
       ["相处距离", "从共同经历开始"],
       ["回应节奏", "带着记忆回应"],
@@ -54,7 +54,7 @@ export default function CompanionProfile() {
   const activeMode = profileModes.find((mode) => mode.id === activeId) ?? profileModes[0];
 
   return (
-    <div className="profile-showcase" aria-label="昭昭角色相处方式演示">
+    <div className="profile-showcase" aria-label="朝朝角色相处方式演示">
       <div className="profile-stage">
         <div className="profile-stage-head">
           <span>COMPANION / 001</span>
@@ -62,7 +62,7 @@ export default function CompanionProfile() {
         </div>
         <div className="profile-name" aria-hidden="true">
           <small>ZHAO ZHAO</small>
-          <strong>昭昭</strong>
+          <strong>朝朝</strong>
         </div>
         <div className="profile-orbit profile-orbit-one" aria-hidden="true" />
         <div className="profile-orbit profile-orbit-two" aria-hidden="true" />
@@ -87,7 +87,7 @@ export default function CompanionProfile() {
           <span>PERSONALITY SIGNAL</span>
           <small>选择一种状态查看回应</small>
         </div>
-        <div className="profile-mode-tabs" aria-label="选择昭昭的相处方式">
+        <div className="profile-mode-tabs" aria-label="选择朝朝的相处方式">
           {profileModes.map((mode) => (
             <button
               key={mode.id}
@@ -103,7 +103,7 @@ export default function CompanionProfile() {
 
         {/* key 用于在切换相处方式时重新播放轻量的内容入场动画。 */}
         <div className="profile-response" key={activeMode.id} aria-live="polite">
-          <span>昭昭 · 此刻会这样说</span>
+          <span>朝朝 · 此刻会这样说</span>
           <blockquote>“{activeMode.quote}”</blockquote>
           <dl>
             {activeMode.signals.map(([term, value]) => (

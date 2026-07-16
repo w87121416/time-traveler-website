@@ -66,11 +66,11 @@ export default function AboutPage() {
         <figure className="about-visual">
           <img
             src={withBasePath("/images/companion-hero.png")}
-            alt="时光旅人首位桌面旅伴昭昭"
+            alt="时光旅人首位桌面旅伴朝朝"
             width="1047"
             height="1800"
           />
-          <figcaption><span>FIRST COMPANION</span><strong>昭昭</strong><small>一段长期陪伴的开始</small></figcaption>
+          <figcaption><span>FIRST COMPANION</span><strong>朝朝</strong><small>一段长期陪伴的开始</small></figcaption>
         </figure>
       </section>
 
