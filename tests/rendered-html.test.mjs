@@ -81,10 +81,10 @@ test("keeps GitHub Pages output static and base-path aware", async () => {
   assert.match(page, /withBasePath\("\/images\/companion-hero\.png"\)/);
   assert.match(downloadMenu, /withBasePath\("\/privacy\/"\)/);
   assert.match(layout, /metadataBase/);
-  assert.match(workflow, /NEXT_PUBLIC_BASE_PATH:\s*\/time-traveler-website/);
+  assert.match(workflow, /NEXT_PUBLIC_BASE_PATH:\s*""/);
   assert.match(
     workflow,
-    /NEXT_PUBLIC_SITE_URL:\s*https:\/\/w87121416\.github\.io\/time-traveler-website/,
+    /NEXT_PUBLIC_SITE_URL:\s*https:\/\/www\.sinbookey\.com/,
   );
   assert.doesNotMatch(page, /SkeletonPreview|login|登录页/i);
 });

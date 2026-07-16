@@ -20,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_TELEMETRY_DISABLED: 1
-      # 过渡期直接使用 GitHub Pages 项目地址，资源与内部路由都需要仓库子路径。
-      NEXT_PUBLIC_BASE_PATH: /time-traveler-website
-      NEXT_PUBLIC_SITE_URL: https://w87121416.github.io/time-traveler-website
+      # 自定义域从根路径访问，资源与内部路由不能再拼接仓库名称子路径。
+      NEXT_PUBLIC_BASE_PATH: ""
+      NEXT_PUBLIC_SITE_URL: https://www.sinbookey.com
     steps:
       - name: 读取官网源码
         uses: actions/checkout@v4
