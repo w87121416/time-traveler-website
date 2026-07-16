@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   description:
     "时光旅人是一位住在桌面上的 AI 陪伴角色。你可以在聊天框添加不同 Skill，让它切换成学习搭子、旅行向导或故事角色。",
   applicationName: "时光旅人",
+  authors: [{ name: "南京形而不器科技有限公司", url: `${publicSiteUrl}/about/` }],
+  creator: "南京形而不器科技有限公司",
+  publisher: "南京形而不器科技有限公司",
   manifest: absoluteSiteUrl("/manifest.webmanifest"),
   keywords: ["时光旅人", "AI 陪伴", "桌面宠物", "桌面伙伴", "AI 角色", "AI Skill", "角色扮演"],
   alternates: {

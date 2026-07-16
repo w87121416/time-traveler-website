@@ -10,7 +10,10 @@ assert.equal(Number.isFinite(warningDays) && warningDays > 0, true, "CERT_WARNIN
 const endpointChecks = [
   { path: "/", contentType: /text\/html/i, marker: /时光旅人/ },
   { path: "/about/", contentType: /text\/html/i, marker: /时光旅人|关于我们/ },
-  { path: "/privacy/", contentType: /text\/html/i, marker: /隐私政策/ },
+  { path: "/privacy/", contentType: /text\/html/i, marker: /官方网站隐私说明/ },
+  { path: "/product-privacy/", contentType: /text\/html/i, marker: /PC 产品隐私政策/ },
+  { path: "/safety/", contentType: /text\/html/i, marker: /AI 安全与未成年人保护/ },
+  { path: "/terms/", contentType: /text\/html/i, marker: /官方网站使用条款/ },
   { path: "/robots.txt", contentType: /text\/plain/i, marker: /User-agent:\s*\*/i },
   { path: "/sitemap.xml", contentType: /(?:application|text)\/xml/i, marker: /<urlset\b/i },
 ];

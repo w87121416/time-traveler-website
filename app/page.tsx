@@ -488,11 +488,13 @@ export default function Home() {
         <div className="footer-meta">
           <div className="footer-links">
             <a href={withBasePath("/about/")}>关于我们 ↗</a>
-            <a href={withBasePath("/privacy/")}>产品隐私草案 ↗</a>
+            <a href={withBasePath("/privacy/")}>官网隐私说明 ↗</a>
+            <a href={withBasePath("/terms/")}>使用条款 ↗</a>
+            <a href={withBasePath("/safety/")}>AI 安全说明 ↗</a>
             <a href="#top">返回顶部 ↑</a>
           </div>
-          <p>当前为公开预览站；产品隐私草案仍需按真实技术实现与运营主体审定。</p>
-          <span>© 2026 TIME TRAVELER</span>
+          <p>当前为公开预览站，PC 产品尚未开放下载；产品隐私将在真实技术实现审定后生效。</p>
+          <span>© 2026 南京形而不器科技有限公司 · 网站角色与视觉素材由团队自研</span>
         </div>
       </footer>
       <PcDownloadStickyTrigger />

@@ -7,10 +7,13 @@ export const dynamic = "force-static";
 const publicPages = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/about/", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/privacy/", changeFrequency: "monthly", priority: 0.5 },
+  { path: "/safety/", changeFrequency: "monthly", priority: 0.5 },
+  { path: "/terms/", changeFrequency: "monthly", priority: 0.4 },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // 隐私页仍是 noindex 草案，因此暂不写入 sitemap；资料审定后两处必须同步开放。
+  // PC 产品隐私仍是 noindex 待发布版本，因此只收录已生效的官网说明与公开安全页。
   return publicPages.map(({ path, changeFrequency, priority }) => ({
     url: absoluteSiteUrl(path),
     changeFrequency,

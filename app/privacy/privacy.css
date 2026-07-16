@@ -728,6 +728,24 @@
   font-size: 13px;
 }
 
+.privacy-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 22px;
+}
+
+.privacy-footer nav a {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  transition: color 160ms ease;
+}
+
+.privacy-footer nav a:hover,
+.privacy-footer nav a:focus-visible {
+  color: var(--gold);
+}
+
 .privacy-footer > a {
   padding-bottom: 7px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.36);
@@ -797,6 +815,10 @@
   .privacy-footer p {
     grid-column: 1 / -1;
     grid-row: 2;
+  }
+
+  .privacy-footer nav {
+    justify-content: flex-end;
   }
 }
 
@@ -907,9 +929,14 @@
   }
 
   .privacy-footer p,
+  .privacy-footer nav,
   .privacy-footer > a {
     grid-column: auto;
     grid-row: auto;
+  }
+
+  .privacy-footer nav {
+    justify-content: flex-start;
   }
 
   .privacy-footer > a {

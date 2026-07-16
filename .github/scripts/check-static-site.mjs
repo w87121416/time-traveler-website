@@ -92,10 +92,13 @@ async function resolvesInsideExport(reference, sourcePublicPath) {
   return (await Promise.all(safeCandidates.map(exists))).some(Boolean);
 }
 
-const [home, about, privacy, robots, sitemap, manifest, cname] = await Promise.all([
+const [home, about, privacy, productPrivacy, safety, terms, robots, sitemap, manifest, cname] = await Promise.all([
   requireFile("index.html"),
   requireFile("about/index.html"),
   requireFile("privacy/index.html"),
+  requireFile("product-privacy/index.html"),
+  requireFile("safety/index.html"),
+  requireFile("terms/index.html"),
   requireFile("robots.txt"),
   requireFile("sitemap.xml"),
   requireFile("manifest.webmanifest"),
@@ -106,16 +109,19 @@ const [home, about, privacy, robots, sitemap, manifest, cname] = await Promise.a
 assert.match(home, /<title>[^<]*时光旅人[^<]*<\/title>/i);
 assert.match(home, /查看 PC 版进度/);
 assert.match(about, /<title>[^<]*(?:关于|时光旅人)[^<]*<\/title>/i);
-assert.match(privacy, /<title>[^<]*隐私[^<]*<\/title>/i);
+assert.match(privacy, /官方网站隐私说明/);
+assert.match(productPrivacy, /PC 产品隐私政策/);
+assert.match(safety, /AI 安全与未成年人保护/);
+assert.match(terms, /官方网站使用条款/);
 assert.match(robots, /User-agent:\s*\*/i);
 assert.match(robots, /Sitemap:\s*https:\/\/www\.sinbookey\.com\/sitemap\.xml/i);
 assert.match(sitemap, /<urlset\b/i);
 assert.match(manifest, /"name"\s*:\s*"时光旅人/);
 assert.equal(cname.trim(), "www.sinbookey.com", "CNAME 必须与 GitHub Pages 自定义域一致");
-for (const pathname of ["/", "/about/"]) {
+for (const pathname of ["/", "/about/", "/privacy/", "/safety/", "/terms/"]) {
   assert.match(sitemap, new RegExp(`<loc>https:\\/\\/www\\.sinbookey\\.com${pathname.replaceAll("/", "\\/")}<\\/loc>`, "i"));
 }
-assert.doesNotMatch(sitemap, /<loc>https:\/\/www\.sinbookey\.com\/privacy\/<\/loc>/i);
+assert.doesNotMatch(sitemap, /<loc>https:\/\/www\.sinbookey\.com\/product-privacy\/<\/loc>/i);
 
 const htmlFiles = await findHtmlFiles();
 const brokenReferences = [];

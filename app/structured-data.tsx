@@ -4,6 +4,22 @@ const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": `${absoluteSiteUrl("/")}#organization`,
+      legalName: "南京形而不器科技有限公司",
+      name: "时光旅人",
+      url: absoluteSiteUrl("/"),
+      email: "414011506@qq.com",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "CN",
+        addressRegion: "江苏省",
+        addressLocality: "南京市",
+        streetAddress:
+          "中国（江苏）自由贸易试验区南京片区七里桥北路1号南京江北新区人力资源服务产业园一期17栋106-707室",
+      },
+    },
+    {
       "@type": "WebSite",
       "@id": `${absoluteSiteUrl("/")}#website`,
       name: "时光旅人",
@@ -11,6 +27,7 @@ const structuredData = {
       url: absoluteSiteUrl("/"),
       inLanguage: "zh-CN",
       description: "住在电脑桌面上的 AI 旅伴官方预览网站。",
+      publisher: { "@id": `${absoluteSiteUrl("/")}#organization` },
     },
     {
       "@type": "VideoObject",

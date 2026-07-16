@@ -2,34 +2,29 @@ import type { Metadata } from "next";
 import { absoluteSiteUrl, withBasePath } from "../site-config";
 
 export const metadata: Metadata = {
-  title: "隐私政策｜时光旅人",
+  title: "官方网站隐私说明｜时光旅人",
   description:
-    "时光旅人官网与 PC 桌面陪伴游戏隐私政策预发布草案，说明个人信息、系统权限、AI 服务与用户权利。",
+    "了解时光旅人官方网站在公开预览阶段如何处理必要访问日志，以及如何联系南京形而不器科技有限公司行使个人信息权利。",
   alternates: {
     canonical: absoluteSiteUrl("/privacy/"),
   },
-  // 当前仍需补齐运营主体和真实数据清单，正式审定前不进入搜索索引。
-  robots: {
-    index: false,
-    follow: true,
-  },
   openGraph: {
-    title: "隐私政策｜时光旅人",
-    description: "了解时光旅人如何处理个人信息、系统权限与 AI 交互数据。",
+    title: "官方网站隐私说明｜时光旅人",
+    description: "了解时光旅人官方网站的必要网络日志、托管方式与个人信息权利。",
     url: absoluteSiteUrl("/privacy/"),
     images: [
       {
         url: absoluteSiteUrl("/og.png"),
         width: 1732,
         height: 908,
-        alt: "时光旅人隐私政策",
+        alt: "时光旅人官方网站隐私说明",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "隐私政策｜时光旅人",
-    description: "了解时光旅人如何处理个人信息、系统权限与 AI 交互数据。",
+    title: "官方网站隐私说明｜时光旅人",
+    description: "了解时光旅人官方网站的必要网络日志、托管方式与个人信息权利。",
     images: [absoluteSiteUrl("/og.png")],
   },
 };
@@ -48,8 +43,6 @@ const policySections = [
 ];
 
 const launchChecklist = [
-  "运营主体完整法定名称、注册地址与常用联系地址",
-  "隐私联系邮箱、客服与投诉渠道",
   "账号、设备、日志、聊天、语音和角色记忆的真实数据清单",
   "麦克风、屏幕、剪贴板、文件、通知等实际系统权限",
   "AI 模型、云存储、统计、崩溃监控等第三方服务商清单",
@@ -57,7 +50,8 @@ const launchChecklist = [
   "产品适用年龄、未成年人机制与是否涉及游戏实名认证",
 ];
 
-export default function PrivacyPage() {
+// 该组件只用于尚未开放下载的 PC 产品隐私方案，不能替代已经生效的官网隐私说明。
+export function ProductPrivacyDraft() {
   return (
     <>
       <main className="privacy-page">
@@ -67,7 +61,7 @@ export default function PrivacyPage() {
           <span className="brand-mark" aria-hidden="true"><i /></span>
           <span>时光旅人</span>
         </a>
-        <span className="privacy-status">预发布草案</span>
+        <span className="privacy-status">PC 产品 · 待发布</span>
         <a className="privacy-back" href={withBasePath("/")}>返回官网 <span aria-hidden="true">↗</span></a>
       </header>
 
@@ -75,18 +69,19 @@ export default function PrivacyPage() {
         <div className="privacy-orbit" aria-hidden="true" />
         <div className="privacy-hero-copy">
           <p className="privacy-eyebrow">PRIVACY POLICY · TIME TRAVELER</p>
-          <h1>隐私政策</h1>
+          <h1>PC 产品隐私政策</h1>
           <p>
-            我们重视你的个人信息与使用选择。本页面用于说明时光旅人官网及 PC 桌面陪伴游戏中的信息处理规则。
+            本页面用于说明时光旅人 PC 桌面陪伴产品拟采用的数据与权限保护方案。产品尚未开放下载，本政策尚未生效。
           </p>
         </div>
         <div className="privacy-version-card">
           <span>POLICY STATUS</span>
-          <strong>0.1 / 草案</strong>
+          <strong>0.2 / 待发布</strong>
           <dl>
             <div><dt>发布日期</dt><dd>2026 年 7 月 15 日</dd></div>
-            <div><dt>生效日期</dt><dd>待正式审定</dd></div>
-            <div><dt>适用产品</dt><dd>官网与 PC 版</dd></div>
+            <div><dt>更新日期</dt><dd>2026 年 7 月 17 日</dd></div>
+            <div><dt>生效日期</dt><dd>PC 产品开放前另行公布</dd></div>
+            <div><dt>适用产品</dt><dd>未来 PC 客户端</dd></div>
           </dl>
         </div>
       </section>
@@ -94,7 +89,7 @@ export default function PrivacyPage() {
       <div className="privacy-draft-banner" role="note">
         <span>上线前重要提示</span>
         <p>
-          本页当前为合规起草版本，不代表产品已经实施所有列举的数据处理活动。正式开放注册或下载前，必须按实际技术实现回填运营主体、数据字段、权限、第三方与保存期限，并由专业法务复核。
+          本页是产品设计与合规基线，不代表客户端已经实施全部列举的数据处理活动。正式开放注册或下载前，我们将按实际技术实现删除不适用项目、补齐模型与第三方清单，并再次发布生效版本。
         </p>
       </div>
 
@@ -111,7 +106,7 @@ export default function PrivacyPage() {
           </nav>
           <div className="privacy-side-note">
             <span>需要帮助？</span>
-            <p>隐私联系邮箱将在运营主体确认后公布。</p>
+            <p>可通过 414011506@qq.com 联系运营主体。</p>
           </div>
         </aside>
 
@@ -120,15 +115,15 @@ export default function PrivacyPage() {
             <div className="policy-number">01</div>
             <h2>政策说明</h2>
             <p>
-              本隐私政策适用于“时光旅人”官方网站以及由实际运营主体提供的 PC 桌面陪伴游戏。iOS、Android 或其他版本正式上线时，我们将根据对应功能、权限和分发渠道更新本政策。
+              本待发布政策仅适用于南京形而不器科技有限公司未来提供的“时光旅人”PC 桌面陪伴产品。官方网站当前的数据处理规则请查阅<a href={withBasePath("/privacy/")}>《官方网站隐私说明》</a>。
             </p>
             <p>
               我们将遵循合法、正当、必要、诚信、公开透明与最小必要原则处理个人信息。只有在实现明确产品功能、保障安全或履行法律义务所必需时，才处理相应信息。
             </p>
             <div className="policy-callout policy-callout-warning">
-              <strong>运营主体待确认</strong>
+              <strong>运营主体已确认</strong>
               <p>
-                正式版本必须在此公开个人信息处理者的完整法定名称、注册地址或联系地址、隐私负责人及投诉渠道，不能仅以“时光旅人”品牌名称代替。
+                个人信息处理者为南京形而不器科技有限公司。产品开放前仍需根据真实实现确认专用客服、模型服务、系统权限及各类数据保存期限。
               </p>
             </div>
             <div className="policy-basis">
@@ -335,13 +330,13 @@ export default function PrivacyPage() {
             <div className="policy-number">10</div>
             <h2>联系我们</h2>
             <p>
-              如你对本政策、个人信息处理或权利请求有任何疑问、意见或投诉，可以通过下列渠道联系我们。正式联系方式将在运营主体确认后开放。
+              如你对本待发布政策、个人信息处理方案或权利请求有任何疑问、意见或投诉，可以通过下列渠道联系我们。
             </p>
             <dl className="contact-card">
-              <div><dt>个人信息处理者</dt><dd>［运营主体完整法定名称待确认］</dd></div>
-              <div><dt>隐私联系邮箱</dt><dd>［待确认］</dd></div>
-              <div><dt>客服与投诉渠道</dt><dd>［待确认］</dd></div>
-              <div><dt>联系地址</dt><dd>［待确认］</dd></div>
+              <div><dt>个人信息处理者</dt><dd>南京形而不器科技有限公司</dd></div>
+              <div><dt>隐私联系邮箱</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
+              <div><dt>客服与投诉渠道</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
+              <div><dt>联系地址</dt><dd>中国（江苏）自由贸易试验区南京片区七里桥北路1号南京江北新区人力资源服务产业园一期17栋106-707室</dd></div>
             </dl>
           </section>
 
@@ -364,7 +359,195 @@ export default function PrivacyPage() {
           <span className="brand-mark" aria-hidden="true"><i /></span>
           <strong>时光旅人</strong>
         </div>
-        <p>隐私不是一段隐藏的小字，而是产品与用户之间长期的信任。</p>
+        <nav aria-label="PC 产品隐私相关链接">
+          <a href={withBasePath("/privacy/")}>官方网站隐私说明</a>
+          <a href={withBasePath("/safety/")}>AI 安全说明</a>
+          <a href={withBasePath("/terms/")}>使用条款</a>
+        </nav>
+        <a href={withBasePath("/")}>返回官网 ↑</a>
+      </footer>
+    </>
+  );
+}
+
+const websitePolicySections = [
+  ["site-overview", "适用范围与运营主体"],
+  ["site-data", "当前官网处理的信息"],
+  ["site-hosting", "托管与境外处理提示"],
+  ["site-storage", "保存期限与安全"],
+  ["site-rights", "你的个人信息权利"],
+  ["site-minors", "未成年人保护"],
+  ["site-updates", "更新与联系我们"],
+];
+
+// 官网与未来客户端的数据流不同，因此官网隐私说明独立生效，避免用尚未实现的产品功能扩大告知范围。
+export default function WebsitePrivacyPage() {
+  return (
+    <>
+      <main className="privacy-page">
+        <header className="privacy-nav">
+          <a className="privacy-brand" href={withBasePath("/")} aria-label="返回时光旅人官网">
+            <span className="brand-mark" aria-hidden="true"><i /></span>
+            <span>时光旅人</span>
+          </a>
+          <span className="privacy-status">1.0 · 已生效</span>
+          <a className="privacy-back" href={withBasePath("/")}>返回官网 <span aria-hidden="true">↗</span></a>
+        </header>
+
+        <section className="privacy-hero" id="content-start" tabIndex={-1}>
+          <div className="privacy-orbit" aria-hidden="true" />
+          <div className="privacy-hero-copy">
+            <p className="privacy-eyebrow">WEBSITE PRIVACY NOTICE · TIME TRAVELER</p>
+            <h1>官方网站隐私说明</h1>
+            <p>
+              本说明只覆盖 www.sinbookey.com 当前的静态产品展示页面，并如实说明网站托管、必要网络日志和联系处理方式。
+            </p>
+          </div>
+          <div className="privacy-version-card">
+            <span>POLICY STATUS</span>
+            <strong>1.0 / 生效</strong>
+            <dl>
+              <div><dt>发布日期</dt><dd>2026 年 7 月 17 日</dd></div>
+              <div><dt>生效日期</dt><dd>2026 年 7 月 17 日</dd></div>
+              <div><dt>适用范围</dt><dd>时光旅人官方网站</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <div className="privacy-draft-banner" role="note">
+          <span>范围提示</span>
+          <p>
+            PC 客户端尚未开放下载。本说明不覆盖未来客户端的账号、AI 对话、长期记忆或系统权限；相关设计基线请参阅<a href={withBasePath("/product-privacy/")}>《PC 产品隐私政策（待发布）》</a>。
+          </p>
+        </div>
+
+        <div className="privacy-layout">
+          <aside className="privacy-sidebar" aria-label="官方网站隐私说明目录">
+            <p>目录</p>
+            <nav>
+              {websitePolicySections.map(([id, label], index) => (
+                <a href={`#${id}`} key={id}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  {label}
+                </a>
+              ))}
+            </nav>
+            <div className="privacy-side-note">
+              <span>隐私与投诉联系</span>
+              <p><a href="mailto:414011506@qq.com">414011506@qq.com</a></p>
+            </div>
+          </aside>
+
+          <article className="privacy-content">
+            <section className="policy-section" id="site-overview">
+              <div className="policy-number">01</div>
+              <h2>适用范围与运营主体</h2>
+              <p>
+                本说明适用于“时光旅人”官方网站 www.sinbookey.com。网站运营主体和个人信息处理者为南京形而不器科技有限公司。
+              </p>
+              <dl className="contact-card">
+                <div><dt>运营主体</dt><dd>南京形而不器科技有限公司</dd></div>
+                <div><dt>联系邮箱</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
+                <div><dt>联系地址</dt><dd>中国（江苏）自由贸易试验区南京片区七里桥北路1号南京江北新区人力资源服务产业园一期17栋106-707室</dd></div>
+              </dl>
+              <div className="policy-basis">
+                <span>主要法律依据</span>
+                <a href="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm" target="_blank" rel="noreferrer">《个人信息保护法》↗</a>
+                <a href="https://www.cac.gov.cn/2024-09/30/c_1729384452307680.htm" target="_blank" rel="noreferrer">《网络数据安全管理条例》↗</a>
+              </div>
+            </section>
+
+            <section className="policy-section" id="site-data">
+              <div className="policy-number">02</div>
+              <h2>当前官网处理的信息</h2>
+              <p>
+                当前官网不提供账号注册、在线 AI 对话、客服表单、支付、公开下载或评论功能；网站代码未接入广告、行为分析、统计、第三方登录或营销 SDK，也不设置用于画像或广告的 Cookie。
+              </p>
+              <div className="storage-grid">
+                <article><span>01</span><h3>不主动收集</h3><p>我们不会通过当前页面主动要求你提交姓名、手机号、身份证件、聊天内容、设备标识或精确位置。</p></article>
+                <article><span>02</span><h3>必要网络日志</h3><p>为传输页面和防护安全，托管基础设施可能自动处理 IP 地址、浏览器类型、访问时间、请求地址和响应状态等必要日志。</p></article>
+                <article><span>03</span><h3>邮件联系</h3><p>如果你主动发送邮件，我们会处理发件地址、邮件内容和附件，仅用于回复咨询、投诉或个人信息权利请求。</p></article>
+              </div>
+              <div className="policy-callout">
+                <strong>没有隐藏的产品数据收集</strong>
+                <p>PC 客户端尚未上线，官网不会借展示页面提前收集 AI 对话、长期记忆、麦克风、屏幕、剪贴板或本地文件信息。</p>
+              </div>
+            </section>
+
+            <section className="policy-section" id="site-hosting">
+              <div className="policy-number">03</div>
+              <h2>托管服务与境外处理提示</h2>
+              <p>
+                当前官网使用 GitHub Pages 作为过渡性静态托管服务。为完成页面访问、安全防护和故障排查，GitHub 可能通过其全球基础设施处理必要网络日志，相关处理可能发生在中国大陆以外地区。
+              </p>
+              <p>
+                我们不在官网代码中另行部署访客追踪工具，也不从当前网站获得可用于广告画像的明细访问数据。GitHub 对相关数据的处理规则请参阅其
+                <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noreferrer">《GitHub 一般隐私声明》</a>。
+              </p>
+              <p>
+                完成中国大陆网站备案并迁移正式托管环境后，我们会根据新的接入商、日志和存储情况及时更新本说明。
+              </p>
+            </section>
+
+            <section className="policy-section" id="site-storage">
+              <div className="policy-number">04</div>
+              <h2>保存期限与安全保护</h2>
+              <p>
+                对于你主动发送的联系邮件，我们通常在事项处理完毕后保存不超过六个月，之后删除或匿名化；法律法规、争议处理或监管要求另有期限的，从其规定。托管方必要日志的保存期限由 GitHub 按其公开规则管理。
+              </p>
+              <p>
+                官网已启用 HTTPS，并采用最小化资源来源、限制表单提交、限制嵌入对象和严格来源策略等页面级安全措施。互联网环境不存在绝对安全，我们将持续修复已知风险并维护依赖更新。
+              </p>
+            </section>
+
+            <section className="policy-section" id="site-rights">
+              <div className="policy-number">05</div>
+              <h2>你的个人信息权利</h2>
+              <p>
+                你可以通过联系邮箱申请查阅、复制、更正、补充或删除我们因邮件联系而处理的个人信息，也可以提出解释、投诉或撤回基于同意的处理。为保护信息安全，我们可能在答复前核验申请人与相关信息的关联。
+              </p>
+              <p>
+                我们将在收到完整请求后十五个工作日内答复；法律法规规定更短期限的，从其规定。当前官网没有账号，因此不存在需要通过本网站办理的账号注销流程。
+              </p>
+            </section>
+
+            <section className="policy-section" id="site-minors">
+              <div className="policy-number">06</div>
+              <h2>未成年人保护</h2>
+              <p>
+                当前官网仅用于介绍尚未开放下载的产品，不提供 AI 互动、虚拟亲密关系、充值或消费功能。未成年人应在监护人指导下浏览，并避免通过邮件发送身份、健康、位置或其他不必要的个人信息。
+              </p>
+              <p>
+                PC 产品正式开放前，我们会另行公布适用年龄、年龄识别、未成年人模式、时长提醒、监护人控制和儿童个人信息处理规则；这些实际保护措施未落实前，不会向未成年人开放相关拟人化互动服务。
+              </p>
+            </section>
+
+            <section className="policy-section" id="site-updates">
+              <div className="policy-number">07</div>
+              <h2>更新与联系我们</h2>
+              <p>
+                当官网增加表单、统计、下载、账号或其他会改变个人信息处理方式的功能时，我们会在功能启用前更新本说明，并在页面显著位置提示重大变化。
+              </p>
+              <dl className="contact-card">
+                <div><dt>隐私、客服与投诉邮箱</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
+                <div><dt>运营主体</dt><dd>南京形而不器科技有限公司</dd></div>
+                <div><dt>当前版本</dt><dd>1.0 · 2026 年 7 月 17 日生效</dd></div>
+              </dl>
+            </section>
+          </article>
+        </div>
+      </main>
+
+      <footer className="privacy-footer">
+        <div>
+          <span className="brand-mark" aria-hidden="true"><i /></span>
+          <strong>时光旅人</strong>
+        </div>
+        <nav aria-label="隐私相关链接">
+          <a href={withBasePath("/product-privacy/")}>PC 产品隐私待发布</a>
+          <a href={withBasePath("/safety/")}>AI 安全与未成年人保护</a>
+          <a href={withBasePath("/terms/")}>官方网站使用条款</a>
+        </nav>
         <a href={withBasePath("/")}>返回官网 ↑</a>
       </footer>
     </>

@@ -41,25 +41,41 @@ test("server-renders the public Time Traveler homepage", async () => {
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|登录后访问/i);
 });
 
-test("server-renders the independent about and privacy pages", async () => {
-  const [aboutResponse, privacyResponse] = await Promise.all([
+test("server-renders the independent company, privacy and safety pages", async () => {
+  const [aboutResponse, privacyResponse, productPrivacyResponse, safetyResponse, termsResponse] = await Promise.all([
     render("/about/"),
     render("/privacy/"),
+    render("/product-privacy/"),
+    render("/safety/"),
+    render("/terms/"),
   ]);
 
   assert.equal(aboutResponse.status, 200);
   assert.equal(privacyResponse.status, 200);
+  assert.equal(productPrivacyResponse.status, 200);
+  assert.equal(safetyResponse.status, 200);
+  assert.equal(termsResponse.status, 200);
 
-  const [aboutHtml, privacyHtml] = await Promise.all([
+  const [aboutHtml, privacyHtml, productPrivacyHtml, safetyHtml, termsHtml] = await Promise.all([
     aboutResponse.text(),
     privacyResponse.text(),
+    productPrivacyResponse.text(),
+    safetyResponse.text(),
+    termsResponse.text(),
   ]);
 
   assert.match(aboutHtml, /让 AI 陪伴，/);
   assert.match(aboutHtml, /真正住进日常/);
-  assert.match(privacyHtml, /<title>隐私政策｜时光旅人<\/title>/i);
-  assert.match(privacyHtml, /PRIVACY POLICY · TIME TRAVELER/);
-  assert.match(privacyHtml, /预发布草案/);
+  assert.match(aboutHtml, /南京形而不器科技有限公司/);
+  assert.match(privacyHtml, /<title>官方网站隐私说明｜时光旅人<\/title>/i);
+  assert.match(privacyHtml, /WEBSITE PRIVACY NOTICE · TIME TRAVELER/);
+  assert.match(privacyHtml, /1\.0 \/ 生效/);
+  assert.match(productPrivacyHtml, /PC 产品隐私政策/);
+  assert.match(productPrivacyHtml, /待发布/);
+  assert.match(safetyHtml, /AI 安全与未成年人保护/);
+  assert.match(safetyHtml, /连续使用每超过两小时/);
+  assert.match(termsHtml, /官方网站使用条款/);
+  assert.match(termsHtml, /当前没有官方安装包/);
 });
 
 test("keeps GitHub Pages output static and base-path aware", async () => {
@@ -80,7 +96,7 @@ test("keeps GitHub Pages output static and base-path aware", async () => {
   assert.match(page, /withBasePath\("\/about\/"\)/);
   assert.match(page, /<OptimizedImage/);
   assert.match(page, /time-traveler-pv-web\.mp4/);
-  assert.match(downloadMenu, /withBasePath\("\/privacy\/"\)/);
+  assert.match(downloadMenu, /withBasePath\("\/product-privacy\/"\)/);
   assert.match(layout, /metadataBase/);
   assert.match(workflow, /NEXT_PUBLIC_BASE_PATH:\s*""/);
   assert.match(

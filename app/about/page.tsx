@@ -97,6 +97,16 @@ export default function AboutPage() {
           <i aria-hidden="true" />
           <div><span>RESERVED</span><strong>iOS / Android</strong></div>
         </div>
+        <div className="about-company">
+          <div>
+            <span>OPERATOR</span>
+            <strong>南京形而不器科技有限公司</strong>
+          </div>
+          <p>
+            我们在南京打造“时光旅人”。官网角色、视觉与宣传素材均由团队自主研发与制作；产品目前处于公开预览阶段，PC 客户端尚未开放下载。
+          </p>
+          <a href="mailto:414011506@qq.com">414011506@qq.com ↗</a>
+        </div>
       </section>
 
       </main>
@@ -107,9 +117,11 @@ export default function AboutPage() {
         </div>
         <nav aria-label="关于页相关链接">
           <a href={withBasePath("/")}>浏览产品主页</a>
-          <a href={withBasePath("/privacy/")}>阅读产品隐私草案</a>
+          <a href={withBasePath("/privacy/")}>官方网站隐私说明</a>
+          <a href={withBasePath("/terms/")}>官方网站使用条款</a>
+          <a href={withBasePath("/safety/")}>AI 安全说明</a>
         </nav>
-        <p>更完整的团队与联系信息，将在产品正式发布前同步更新。</p>
+        <p>© 2026 南京形而不器科技有限公司 · 联系地址详见官方网站隐私说明。</p>
       </footer>
     </>
   );

@@ -6,7 +6,8 @@ const mobileLinks = [
   { href: "#skills", label: "Skill" },
   { href: "#travel", label: "旅行回忆" },
   { href: "#film", label: "宣传片" },
-  { href: withBasePath("/privacy/"), label: "产品隐私草案" },
+  { href: withBasePath("/privacy/"), label: "官网隐私说明" },
+  { href: withBasePath("/safety/"), label: "AI 安全说明" },
 ];
 
 export default function MobileNav() {
