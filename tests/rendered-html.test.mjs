@@ -40,6 +40,7 @@ test("server-renders the public Time Traveler homepage", async () => {
   assert.match(html, /查看 PC 版进度/);
   assert.match(html, /href="\/privacy\/"/);
   assert.match(html, /部分视觉素材包含 AI 生成内容，并经团队美术人工修改与再创作/);
+  assert.doesNotMatch(html, /共同记忆中的照片碎片/);
   assert.doesNotMatch(html, /网站角色与视觉素材由团队自研/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|登录后访问/i);
 });

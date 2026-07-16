@@ -327,20 +327,6 @@ export default function Home() {
             height="940"
             loading="lazy"
           />
-          <div className="memory-fragments" aria-label="共同记忆中的照片碎片">
-            <figure>
-              <OptimizedImage src="/images/travel-pavilion.jpg" alt="旅途中经过的水榭" width="1500" height="844" loading="lazy" />
-              <figcaption>远行 · 01</figcaption>
-            </figure>
-            <figure>
-              <OptimizedImage src="/images/travel-canal.jpg" alt="旅途中经过的水巷" width="1500" height="844" loading="lazy" />
-              <figcaption>远行 · 02</figcaption>
-            </figure>
-            <figure>
-              <OptimizedImage src="/images/travel-lake.jpg" alt="旅途中看见的湖面" width="1500" height="844" loading="lazy" />
-              <figcaption>远行 · 03</figcaption>
-            </figure>
-          </div>
           <div className="memory-photo-meta">
             <span>旅途回忆 · 18:42</span>
             <p>“玻璃后面的光像水一样。下次，也想和你一起看。”</p>
