@@ -5928,6 +5928,11 @@ main {
 
 /* 极窄屏回退为单列，避免功能卡文字被压得过碎。 */
 @media (max-width: 360px) {
+  /* 底部已有完整 PC 入口，极窄屏隐藏顶部重复入口以避免导航横向溢出。 */
+  .nav-download {
+    display: none;
+  }
+
   .feature-rail {
     grid-template-columns: 1fr;
   }

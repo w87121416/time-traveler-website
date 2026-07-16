@@ -38,6 +38,8 @@ test("server-renders the public Time Traveler homepage", async () => {
   assert.match(html, /同一位朝朝/);
   assert.match(html, /查看 PC 版进度/);
   assert.match(html, /href="\/privacy\/"/);
+  assert.match(html, /部分视觉素材包含 AI 生成内容，并经团队美术人工修改与再创作/);
+  assert.doesNotMatch(html, /网站角色与视觉素材由团队自研/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|登录后访问/i);
 });
 
@@ -67,6 +69,7 @@ test("server-renders the independent company, privacy and safety pages", async (
   assert.match(aboutHtml, /让 AI 陪伴，/);
   assert.match(aboutHtml, /真正住进日常/);
   assert.match(aboutHtml, /南京形而不器科技有限公司/);
+  assert.match(aboutHtml, /包含 AI 生成内容/);
   assert.match(privacyHtml, /<title>官方网站隐私说明｜时光旅人<\/title>/i);
   assert.match(privacyHtml, /WEBSITE PRIVACY NOTICE · TIME TRAVELER/);
   assert.match(privacyHtml, /1\.0 \/ 生效/);
@@ -76,6 +79,10 @@ test("server-renders the independent company, privacy and safety pages", async (
   assert.match(safetyHtml, /连续使用每超过两小时/);
   assert.match(termsHtml, /官方网站使用条款/);
   assert.match(termsHtml, /当前没有官方安装包/);
+  assert.match(termsHtml, /1\.1 \/ 生效/);
+  assert.match(termsHtml, /更新日期[\s\S]*生效日期/);
+  assert.match(termsHtml, /生成记录、创作源文件和修改过程/);
+  assert.doesNotMatch(aboutHtml + termsHtml, /视觉与宣传素材均由团队自主研发与制作|视觉素材均由团队自主研发与制作/);
 });
 
 test("keeps GitHub Pages output static and base-path aware", async () => {

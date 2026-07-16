@@ -33,7 +33,7 @@ export default function TermsPage() {
             <span className="brand-mark" aria-hidden="true"><i /></span>
             <span>时光旅人</span>
           </a>
-          <span className="privacy-status">1.0 · 已生效</span>
+          <span className="privacy-status">1.1 · 已生效</span>
           <a className="privacy-back" href={withBasePath("/")}>返回官网 <span aria-hidden="true">↗</span></a>
         </header>
 
@@ -46,9 +46,10 @@ export default function TermsPage() {
           </div>
           <div className="privacy-version-card">
             <span>TERMS STATUS</span>
-            <strong>1.0 / 生效</strong>
+            <strong>1.1 / 生效</strong>
             <dl>
               <div><dt>发布日期</dt><dd>2026 年 7 月 17 日</dd></div>
+              <div><dt>更新日期</dt><dd>2026 年 7 月 17 日</dd></div>
               <div><dt>生效日期</dt><dd>2026 年 7 月 17 日</dd></div>
               <div><dt>适用范围</dt><dd>官方网站</dd></div>
             </dl>
@@ -96,7 +97,10 @@ export default function TermsPage() {
               <div className="policy-number">03</div>
               <h2>内容与知识产权</h2>
               <p>
-                除页面另有说明外，本网站的品牌名称、角色设定、图片、视频、界面、文案和其他视觉素材均由团队自主研发与制作，相关权利由南京形而不器科技有限公司或合法权利人享有。
+                本网站的品牌名称、角色设定、界面和文案由团队自主策划与制作；部分图片、视频及其他视觉素材包含 AI 生成内容，并由团队美术完成人工修改与再创作。
+              </p>
+              <p>
+                团队完成的原创表达、人工修改、选择编排与其他依法可受保护部分，其相关权利由南京形而不器科技有限公司或合法权利人依法享有。我们将保存必要的生成记录、创作源文件和修改过程，并按适用规则履行 AI 生成合成内容标识义务。
               </p>
               <p>
                 未经书面许可，不得将网站内容用于仿冒产品、商业再分发、训练未经授权的角色模型、误导性宣传或移除权利标识。正常的网页链接、非商业评论和法律允许的合理使用不受影响，但不得暗示获得公司背书。
@@ -134,7 +138,7 @@ export default function TermsPage() {
               <dl className="contact-card">
                 <div><dt>运营主体</dt><dd>南京形而不器科技有限公司</dd></div>
                 <div><dt>联系邮箱</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
-                <div><dt>版本</dt><dd>1.0 · 2026 年 7 月 17 日</dd></div>
+                <div><dt>版本</dt><dd>1.1 · 2026 年 7 月 17 日</dd></div>
               </dl>
             </section>
           </article>

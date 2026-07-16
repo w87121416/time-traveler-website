@@ -494,7 +494,7 @@ export default function Home() {
             <a href="#top">返回顶部 ↑</a>
           </div>
           <p>当前为公开预览站，PC 产品尚未开放下载；产品隐私将在真实技术实现审定后生效。</p>
-          <span>© 2026 南京形而不器科技有限公司 · 网站角色与视觉素材由团队自研</span>
+          <span>© 2026 南京形而不器科技有限公司 · 网站内容由团队自主策划 · 部分视觉素材包含 AI 生成内容，并经团队美术人工修改与再创作</span>
         </div>
       </footer>
       <PcDownloadStickyTrigger />
