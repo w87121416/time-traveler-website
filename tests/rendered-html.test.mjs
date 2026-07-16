@@ -36,6 +36,7 @@ test("server-renders the public Time Traveler homepage", async () => {
   assert.match(html, />关于我们<\/a>/);
   assert.match(html, /为聊天添加不同 Skill/);
   assert.match(html, /同一位朝朝/);
+  assert.match(html, /花影中的银发时光旅人朝朝/);
   assert.match(html, /查看 PC 版进度/);
   assert.match(html, /href="\/privacy\/"/);
   assert.match(html, /部分视觉素材包含 AI 生成内容，并经团队美术人工修改与再创作/);

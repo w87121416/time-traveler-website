@@ -251,9 +251,9 @@ export default function Home() {
           </div>
           <OptimizedImage
             src="/images/companion-scene.jpg"
-            alt="桌面场景中的时光旅人角色"
-            width="1445"
-            height="1700"
+            alt="花影中的银发时光旅人朝朝"
+            width="1243"
+            height="921"
             loading="lazy"
           />
           <div className="scene-reaction-card">
