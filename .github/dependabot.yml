@@ -1,0 +1,42 @@
+version: 2
+
+updates:
+  # 应用依赖每周检查一次；补丁和次版本合并为较少的审查请求，大版本仍单独评估。
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "10:00"
+      timezone: Asia/Shanghai
+    open-pull-requests-limit: 5
+    rebase-strategy: auto
+    groups:
+      safe-npm-updates:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    commit-message:
+      prefix: "chore(deps)"
+
+  # GitHub Actions 版本也纳入更新，减少长期使用过期运行时的风险。
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "10:15"
+      timezone: Asia/Shanghai
+    open-pull-requests-limit: 5
+    rebase-strategy: auto
+    groups:
+      safe-action-updates:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    commit-message:
+      prefix: "chore(actions)"

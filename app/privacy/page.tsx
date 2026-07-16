@@ -26,6 +26,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "隐私政策｜时光旅人",
+    description: "了解时光旅人如何处理个人信息、系统权限与 AI 交互数据。",
+    images: [absoluteSiteUrl("/og.png")],
+  },
 };
 
 const policySections = [
@@ -53,7 +59,8 @@ const launchChecklist = [
 
 export default function PrivacyPage() {
   return (
-    <main className="privacy-page">
+    <>
+      <main className="privacy-page">
       {/* 隐私页沿用主站品牌识别，但收敛动效与装饰，优先保证长文可读性。 */}
       <header className="privacy-nav">
         <a className="privacy-brand" href={withBasePath("/")} aria-label="返回时光旅人官网">
@@ -64,7 +71,7 @@ export default function PrivacyPage() {
         <a className="privacy-back" href={withBasePath("/")}>返回官网 <span aria-hidden="true">↗</span></a>
       </header>
 
-      <section className="privacy-hero">
+      <section className="privacy-hero" id="content-start" tabIndex={-1}>
         <div className="privacy-orbit" aria-hidden="true" />
         <div className="privacy-hero-copy">
           <p className="privacy-eyebrow">PRIVACY POLICY · TIME TRAVELER</p>
@@ -138,7 +145,12 @@ export default function PrivacyPage() {
             <p>
               下表是依据当前产品形态整理的待核对清单，并不表示所有项目都会被收集。正式政策只会保留产品实际处理的项目，并写明具体字段、是否必要、拒绝后果、存储位置与保存期限。
             </p>
-            <div className="policy-table-wrap">
+            <div
+              className="policy-table-wrap"
+              role="region"
+              aria-label="个人信息处理核对表，可横向滚动"
+              tabIndex={0}
+            >
               <table className="policy-table">
                 <thead>
                   <tr><th>使用场景</th><th>需要核实的信息</th><th>拟实现目的</th><th>当前状态</th></tr>
@@ -346,6 +358,7 @@ export default function PrivacyPage() {
         </article>
       </div>
 
+      </main>
       <footer className="privacy-footer">
         <div>
           <span className="brand-mark" aria-hidden="true"><i /></span>
@@ -354,6 +367,6 @@ export default function PrivacyPage() {
         <p>隐私不是一段隐藏的小字，而是产品与用户之间长期的信任。</p>
         <a href={withBasePath("/")}>返回官网 ↑</a>
       </footer>
-    </main>
+    </>
   );
 }

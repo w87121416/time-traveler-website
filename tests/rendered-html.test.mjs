@@ -36,7 +36,7 @@ test("server-renders the public Time Traveler homepage", async () => {
   assert.match(html, />关于我们<\/a>/);
   assert.match(html, /为聊天添加不同 Skill/);
   assert.match(html, /同一位朝朝/);
-  assert.match(html, /获取 PC 版/);
+  assert.match(html, /查看 PC 版进度/);
   assert.match(html, /href="\/privacy\/"/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|登录后访问/i);
 });
@@ -78,7 +78,8 @@ test("keeps GitHub Pages output static and base-path aware", async () => {
   assert.match(siteConfig, /NEXT_PUBLIC_BASE_PATH/);
   assert.match(siteConfig, /https:\/\/www\.sinbookey\.com/);
   assert.match(page, /withBasePath\("\/about\/"\)/);
-  assert.match(page, /withBasePath\("\/images\/companion-hero\.png"\)/);
+  assert.match(page, /<OptimizedImage/);
+  assert.match(page, /time-traveler-pv-web\.mp4/);
   assert.match(downloadMenu, /withBasePath\("\/privacy\/"\)/);
   assert.match(layout, /metadataBase/);
   assert.match(workflow, /NEXT_PUBLIC_BASE_PATH:\s*""/);

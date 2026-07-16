@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { withBasePath } from "./site-config";
+import OptimizedImage from "./optimized-image";
 
 // 朝朝的官网展示强调“相处方式”，不直接暴露角色制作阶段的三视图原型稿。
 const profileModes = [
@@ -66,9 +66,9 @@ export default function CompanionProfile() {
         </div>
         <div className="profile-orbit profile-orbit-one" aria-hidden="true" />
         <div className="profile-orbit profile-orbit-two" aria-hidden="true" />
-        <img
+        <OptimizedImage
           key={activeMode.id}
-          src={withBasePath(activeMode.image)}
+          src={activeMode.image}
           alt={activeMode.imageAlt}
           width="1672"
           height="941"

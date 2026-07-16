@@ -1,0 +1,36 @@
+name: 官网每日可用性监控
+
+on:
+  schedule:
+    # 每天北京时间 09:20 检查；GitHub 的定时表达式使用 UTC。
+    - cron: "20 1 * * *"
+  workflow_dispatch:
+
+# 监控任务只读取仓库中的检查脚本，不拥有部署或修改 Issues 的权限。
+permissions:
+  contents: read
+
+concurrency:
+  group: production-uptime
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    name: 页面与 HTTPS 证书
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SITE_ORIGIN: https://www.sinbookey.com
+      # 剩余有效期不足 21 天时主动失败，给证书自动续期留出处理时间。
+      CERT_WARNING_DAYS: 21
+    steps:
+      - name: 读取监控脚本
+        uses: actions/checkout@v4
+
+      - name: 准备 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 检查页面、SEO 文件与证书
+        run: node .github/scripts/check-uptime.mjs

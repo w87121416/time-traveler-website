@@ -1,0 +1,51 @@
+name: 官网质量检查
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 质量检查只读取源码，不授予发布、写仓库或访问密钥的权限。
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: 代码、类型与静态站点
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      # 正式域名从根路径提供服务，检查环境必须与 Pages 发布环境保持一致。
+      NEXT_PUBLIC_BASE_PATH: ""
+      NEXT_PUBLIC_SITE_URL: https://www.sinbookey.com
+    steps:
+      - name: 读取官网源码
+        uses: actions/checkout@v4
+
+      - name: 准备 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 按锁文件安装依赖
+        run: npm ci
+
+      - name: 检查代码规范
+        run: npm run lint
+
+      - name: 检查 TypeScript 类型
+        run: npm exec -- tsc --noEmit -p tsconfig.github.json
+
+      - name: 构建 GitHub Pages 静态站点
+        run: npm run build:github
+
+      - name: 检查关键页面与站内链接
+        run: node .github/scripts/check-static-site.mjs

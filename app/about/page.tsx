@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import OptimizedImage from "../optimized-image";
 import { absoluteSiteUrl, withBasePath } from "../site-config";
 
 export const metadata: Metadata = {
@@ -41,7 +42,8 @@ const productIdeas = [
 
 export default function AboutPage() {
   return (
-    <main className="about-page">
+    <>
+      <main className="about-page">
       {/* 关于页保持品牌感，但信息控制在两屏内，避免再次拉长主页。 */}
       <header className="about-nav">
         <a className="about-brand" href={withBasePath("/")} aria-label="返回时光旅人官网">
@@ -52,7 +54,7 @@ export default function AboutPage() {
         <a href={withBasePath("/")}>返回主页 ↗</a>
       </header>
 
-      <section className="about-hero">
+      <section className="about-hero" id="content-start" tabIndex={-1}>
         <div className="about-hero-copy">
           <p><span /> ABOUT TIME TRAVELER</p>
           <h1>让 AI 陪伴，<br />真正住进日常。</h1>
@@ -64,8 +66,8 @@ export default function AboutPage() {
           </div>
         </div>
         <figure className="about-visual">
-          <img
-            src={withBasePath("/images/companion-hero.png")}
+          <OptimizedImage
+            src="/images/companion-hero.png"
             alt="时光旅人首位桌面旅伴朝朝"
             width="1047"
             height="1800"
@@ -97,6 +99,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      </main>
       <footer className="about-footer">
         <div>
           <span>TIME TRAVELER</span>
@@ -104,10 +107,10 @@ export default function AboutPage() {
         </div>
         <nav aria-label="关于页相关链接">
           <a href={withBasePath("/")}>浏览产品主页</a>
-          <a href={withBasePath("/privacy/")}>阅读隐私政策</a>
+          <a href={withBasePath("/privacy/")}>阅读产品隐私草案</a>
         </nav>
         <p>更完整的团队与联系信息，将在产品正式发布前同步更新。</p>
       </footer>
-    </main>
+    </>
   );
 }

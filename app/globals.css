@@ -47,10 +47,23 @@ video {
   max-width: 100%;
 }
 
+/* picture 不新增布局盒，现有角色定位和画廊比例可直接复用。 */
+.optimized-picture {
+  display: contents;
+}
+
 button,
 summary,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* 所有主要交互共用清晰的键盘焦点，避免仅依赖颜色变化。 */
+button:focus-visible,
+summary:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -60,6 +73,30 @@ a {
 
 main {
   overflow: clip;
+}
+
+/* 键盘用户可以绕过长导航，直接进入主要内容。 */
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 12px;
+  left: 16px;
+  padding: 11px 16px;
+  color: var(--ink);
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(8, 11, 24, 0.28);
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.mobile-nav,
+.mobile-sticky-cta {
+  display: none;
 }
 
 /* 品牌圆环：以时间轨道和陪伴光点组成最小识别符号。 */
@@ -899,7 +936,8 @@ main {
   letter-spacing: 0.12em;
 }
 
-.desktop-scene > img {
+.desktop-scene > img,
+.desktop-scene > picture > img {
   width: 100%;
   max-height: 710px;
   object-fit: cover;
@@ -1554,7 +1592,8 @@ main {
   font-size: 12px;
 }
 
-.personality-visual > img {
+.personality-visual > img,
+.personality-visual > picture > img {
   position: relative;
   z-index: 1;
   width: 100%;
@@ -1705,7 +1744,8 @@ main {
   opacity: 0.5;
 }
 
-.profile-stage > img {
+.profile-stage > img,
+.profile-stage > picture > img {
   position: absolute;
   z-index: 2;
   inset: 0;
@@ -1964,7 +2004,8 @@ main {
   overflow: hidden;
 }
 
-.memory-image-wrap > img {
+.memory-image-wrap > img,
+.memory-image-wrap > picture > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -3074,11 +3115,114 @@ main {
 
   .site-nav {
     height: 82px;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
   }
 
   .nav-links {
     display: none;
+  }
+
+  .mobile-nav {
+    position: relative;
+    z-index: 40;
+    display: block;
+    justify-self: end;
+  }
+
+  .mobile-nav summary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 13px;
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 999px;
+    list-style: none;
+    cursor: pointer;
+    font-size: 11px;
+  }
+
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav summary i,
+  .mobile-nav summary i::before,
+  .mobile-nav summary i::after {
+    width: 12px;
+    height: 1px;
+    display: block;
+    background: currentColor;
+  }
+
+  .mobile-nav summary i {
+    position: relative;
+  }
+
+  .mobile-nav summary i::before,
+  .mobile-nav summary i::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .mobile-nav summary i::before {
+    top: -4px;
+  }
+
+  .mobile-nav summary i::after {
+    top: 4px;
+  }
+
+  .mobile-nav nav {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: min(270px, calc(100vw - 36px));
+    display: grid;
+    padding: 10px;
+    color: var(--ink);
+    background: rgba(255, 253, 248, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 24px 70px rgba(2, 4, 12, 0.36);
+    backdrop-filter: blur(24px);
+  }
+
+  .mobile-nav nav a {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid rgba(8, 11, 24, 0.09);
+    font-size: 13px;
+  }
+
+  .mobile-nav nav a:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-sticky-cta {
+    position: fixed;
+    z-index: 90;
+    right: 18px;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 18px;
+    color: var(--ink);
+    background: var(--gold);
+    border: 0;
+    border-radius: 999px;
+    box-shadow: 0 18px 50px rgba(8, 11, 24, 0.34);
+    font-size: 12px;
+    font-weight: 700;
   }
 
   .nav-cta {
@@ -3864,8 +4008,6 @@ main {
   height: 12px;
 }
 
-.nav-download:hover .nav-download-popover,
-.nav-download:focus-within .nav-download-popover,
 .nav-download[open] .nav-download-popover,
 #pc-download:target + .nav-download-popover {
   opacity: 1;
@@ -3934,6 +4076,67 @@ main {
   letter-spacing: 0.08em;
 }
 
+.nav-download-qr img {
+  position: relative;
+  z-index: 2;
+  width: 112px;
+  height: 112px;
+  padding: 7px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 12px;
+}
+
+/* 页面中段点击手机悬浮按钮时，以原生 dialog 在当前视口显示状态。 */
+.nav-download-dialog {
+  width: min(440px, calc(100vw - 32px));
+  max-width: none;
+  padding: 0;
+  overflow: visible;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+}
+
+.nav-download-dialog::backdrop {
+  background: rgba(4, 6, 16, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.nav-download-dialog > form {
+  position: absolute;
+  z-index: 4;
+  top: 10px;
+  right: 10px;
+  margin: 0;
+}
+
+.nav-download-dialog > form button {
+  min-width: 48px;
+  min-height: 40px;
+  color: rgba(8, 11, 24, 0.62);
+  background: rgba(8, 11, 24, 0.07);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.nav-download-dialog .nav-download-dialog-panel {
+  position: relative;
+  top: auto;
+  right: auto;
+  width: 100%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+
+.nav-download-dialog .nav-download-dialog-panel::before {
+  display: none;
+}
+
 .nav-download-copy > span,
 .nav-download-copy strong,
 .nav-download-copy a {
@@ -3959,21 +4162,50 @@ main {
   line-height: 1.65;
 }
 
-.nav-download-copy button {
+.nav-download-copy .download-status-link {
   width: 100%;
-  min-height: 34px;
-  color: rgba(255, 255, 255, 0.62);
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  color: #fff;
   background: var(--ink-soft);
   border: 0;
   border-radius: 10px;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .nav-download-copy a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 9px;
-  color: rgba(8, 11, 24, 0.48);
-  font-size: 8px;
+  color: rgba(8, 11, 24, 0.68);
+  font-size: 11px;
   text-align: center;
+}
+
+.film-transcript {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.72);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.film-transcript summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.film-transcript p {
+  margin: 0;
+  padding: 0 0 14px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px;
+  line-height: 1.8;
 }
 
 /* 03 Skill 区按照提供的产品原型，重构为真实桌面背景上的可交互技能面板。 */
@@ -5553,31 +5785,12 @@ main {
 /* 手机最终适配：保留“关于我们”，压缩首屏与功能卡，同时把主要触控目标提高到 44px。 */
 @media (max-width: 600px) {
   .site-nav {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto auto;
     gap: 10px;
   }
 
   .nav-links {
-    display: flex;
-    justify-self: end;
-    gap: 0;
-    padding: 0;
-    background: transparent;
-    border: 0;
-    backdrop-filter: none;
-  }
-
-  .nav-links a {
     display: none;
-  }
-
-  .nav-links a:first-child {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    padding: 0 4px;
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 11px;
   }
 
   .nav-download {
@@ -5676,6 +5889,98 @@ main {
   .feature-item:last-child {
     border-bottom: 0;
   }
+}
+
+/* 上线可读性收尾：功能性文字不再使用仅适合装饰标签的超小字号。 */
+.footer-meta p,
+.footer-meta span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.footer-links a,
+.about-footer nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.about-footer > p {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.about-ideas p {
+  color: rgba(8, 11, 24, 0.66);
+  font-size: 14px;
+}
+
+.nav-download-copy p {
+  color: rgba(8, 11, 24, 0.68);
+  font-size: 12px;
+}
+
+.profile-console-head,
+.profile-console-head small,
+.profile-response > span,
+.profile-response dt {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 10px;
+}
+
+.profile-mode-tabs span {
+  font-size: 9px;
+}
+
+.profile-mode-tabs strong,
+.profile-response dd {
+  font-size: 11px;
+}
+
+.skill-reference-status span,
+.skill-reference-status small,
+.skill-reference-chat header small,
+.skill-reference-active,
+.skill-reference-reading span,
+.skill-reference-reading small {
+  font-size: 10px;
+}
+
+.skill-reference-scene figcaption span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 9px;
+}
+
+.skill-reference-role p,
+.skill-reference-composer p {
+  color: rgba(8, 11, 24, 0.68);
+  font-size: 11px;
+}
+
+.skill-reference-role strong,
+.skill-reference-user,
+.skill-reference-reply p {
+  font-size: 12px;
+}
+
+.film-labels {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 10px;
+}
+
+.nav-download-dialog > form {
+  top: -48px;
+  right: 0;
+}
+
+.nav-download-dialog > form button {
+  min-height: 44px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 12px;
 }
 
 @media (prefers-reduced-motion: reduce) {

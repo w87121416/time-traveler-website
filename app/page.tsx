@@ -1,7 +1,9 @@
 import type { CSSProperties } from "react";
 import { withBasePath } from "./site-config";
 import CompanionProfile from "./companion-profile";
-import { PcDownloadMenu, PcDownloadTrigger } from "./download-menu";
+import { PcDownloadMenu, PcDownloadStickyTrigger, PcDownloadTrigger } from "./download-menu";
+import MobileNav from "./mobile-nav";
+import OptimizedImage from "./optimized-image";
 import SkillShowcase from "./skill-showcase";
 
 const featureMoments = [
@@ -64,7 +66,7 @@ const faqs = [
   {
     question: "时光旅人目前支持哪些平台？",
     answer:
-      "当前官网以 PC 版为主，iOS 与 Android 的下载入口已经在页面结构中预留，正式开放后可以直接接入。",
+      "当前以 PC 桌面版为第一阶段，具体支持的操作系统与最低配置将在测试渠道确认后公布；iOS 与 Android 仍处于后续规划阶段。",
   },
   {
     question: "桌面伙伴会做些什么？",
@@ -84,19 +86,20 @@ const faqs = [
   {
     question: "如何获取 PC 版？",
     answer:
-      "PC 版下载地址与二维码将在正式链接确认后接入。当前页面已完整预留下载位，不会用无效链接误导你。",
+      "PC 版尚未开放公众下载。测试或正式发布渠道确认后，官网会同步提供经过验证的下载地址、版本信息与安全校验说明。",
   },
 ];
 
 export default function Home() {
   // CSS 背景图也需要带上 GitHub Pages 的仓库子路径。
   const pageAssetVariables = {
-    "--hero-day-image": `url("${withBasePath("/images/travel-day.jpg")}")`,
-    "--travel-night-image": `url("${withBasePath("/images/travel-night.jpg")}")`,
+    "--hero-day-image": `url("${withBasePath("/images/travel-day.webp")}")`,
+    "--travel-night-image": `url("${withBasePath("/images/travel-night.webp")}")`,
   } as CSSProperties;
 
   return (
-    <main style={pageAssetVariables}>
+    <>
+      <main style={pageAssetVariables}>
       {/* 首屏：让角色成为品牌主角，而不是普通产品配图。 */}
       <section className="hero" id="top">
         <div className="hero-sky" aria-hidden="true" />
@@ -116,11 +119,13 @@ export default function Home() {
             <a href="#film">宣传片</a>
           </nav>
 
+          <MobileNav />
+
           {/* PC 下载改为顶部轻量弹层；正式地址确认后可直接替换二维码与按钮链接。 */}
           <PcDownloadMenu />
         </header>
 
-        <div className="hero-inner">
+        <div className="hero-inner" id="content-start" tabIndex={-1}>
           <div className="hero-copy">
             <p className="eyebrow">
               <span /> AI 桌面陪伴角色 · PC 版
@@ -141,7 +146,7 @@ export default function Home() {
             </div>
             <div className="hero-note">
               <span className="online-dot" />
-              下载链接确认后，即可接入二维码与安装包
+              PC 版本与测试渠道确认中 · 暂未开放公众下载
             </div>
           </div>
 
@@ -156,12 +161,13 @@ export default function Home() {
               <div className="window-scenery" />
             </div>
             <div className="character-halo" aria-hidden="true" />
-            <img
+            <OptimizedImage
               className="hero-character"
-              src={withBasePath("/images/companion-hero.png")}
+              src="/images/companion-hero.png"
               alt="银发白衣的时光旅人桌面伙伴"
               width="1047"
               height="1800"
+              fetchPriority="high"
             />
             <div className="floating-chat">
               <span className="chat-avatar" aria-hidden="true">时</span>
@@ -243,8 +249,8 @@ export default function Home() {
             <span>DESKTOP COMPANION</span>
             <span>在线 · 正在陪伴</span>
           </div>
-          <img
-            src={withBasePath("/images/companion-scene.jpg")}
+          <OptimizedImage
+            src="/images/companion-scene.jpg"
             alt="桌面场景中的时光旅人角色"
             width="1445"
             height="1700"
@@ -314,8 +320,8 @@ export default function Home() {
 
       <section className="memory-section">
         <div className="memory-image-wrap">
-          <img
-            src={withBasePath("/images/aquarium-memory.jpg")}
+          <OptimizedImage
+            src="/images/aquarium-memory.jpg"
             alt="角色在水族馆与金鱼相遇的旅行画面"
             width="1672"
             height="940"
@@ -323,15 +329,15 @@ export default function Home() {
           />
           <div className="memory-fragments" aria-label="共同记忆中的照片碎片">
             <figure>
-              <img src={withBasePath("/images/travel-pavilion.jpg")} alt="旅途中经过的水榭" loading="lazy" />
+              <OptimizedImage src="/images/travel-pavilion.jpg" alt="旅途中经过的水榭" width="1500" height="844" loading="lazy" />
               <figcaption>远行 · 01</figcaption>
             </figure>
             <figure>
-              <img src={withBasePath("/images/travel-canal.jpg")} alt="旅途中经过的水巷" loading="lazy" />
+              <OptimizedImage src="/images/travel-canal.jpg" alt="旅途中经过的水巷" width="1500" height="844" loading="lazy" />
               <figcaption>远行 · 02</figcaption>
             </figure>
             <figure>
-              <img src={withBasePath("/images/travel-lake.jpg")} alt="旅途中看见的湖面" loading="lazy" />
+              <OptimizedImage src="/images/travel-lake.jpg" alt="旅途中看见的湖面" width="1500" height="844" loading="lazy" />
               <figcaption>远行 · 03</figcaption>
             </figure>
           </div>
@@ -369,11 +375,16 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="travel-gallery">
+        <div
+          className="travel-gallery"
+          role="region"
+          aria-label="旅行回忆照片；在窄屏设备上可横向滚动"
+          tabIndex={0}
+        >
           {travelCards.map((card, index) => (
             <figure className={card.className} key={card.image}>
               <span className="photo-number">0{index + 1}</span>
-              <img src={withBasePath(card.image)} alt={card.title} loading="lazy" />
+              <OptimizedImage src={card.image} alt={card.title} width="1500" height="844" loading="lazy" />
               <figcaption>
                 <strong>{card.title}</strong>
                 <span>{card.meta}</span>
@@ -409,23 +420,25 @@ export default function Home() {
               controls
               playsInline
               preload="metadata"
-              poster={withBasePath("/images/pv-poster.jpg")}
+              poster={withBasePath("/images/pv-poster.webp")}
               aria-label="时光旅人官方宣传片"
+              aria-describedby="film-accessibility-note"
             >
-              {/* PC 优先加载 1080p 高清版；窄屏设备保留轻量版本，避免移动网络一次加载过大。 */}
-              <source
-                src={withBasePath("/media/time-traveler-pv-1080p.m4v")}
-                type="video/mp4"
-                media="(min-width: 901px)"
-              />
-              <source src={withBasePath("/media/time-traveler-pv.m4v")} type="video/mp4" />
+              {/* 单一网页快启版兼顾 1080p 清晰度与移动网络体积，避免选择到 47MB 原片。 */}
+              <source src={withBasePath("/media/time-traveler-pv-web.mp4")} type="video/mp4" />
               你的浏览器暂不支持视频播放。
             </video>
+            <details className="film-transcript" id="film-accessibility-note">
+              <summary>宣传片内容概览</summary>
+              <p>
+                银发旅伴出现在明亮的日常空间，以动作与表情回应用户，呈现一位 AI 角色陪伴工作、休息与生活片刻的核心氛围。产品能力的完整文字说明可在本页“产品体验”“Skill”与“旅行回忆”章节阅读。
+              </p>
+            </details>
           </div>
 
           <figure className="film-playtest-poster">
-            <img
-              src={withBasePath("/images/desktop-playtest-poster.jpg")}
+            <OptimizedImage
+              src="/images/desktop-playtest-poster.jpg"
               alt="时光旅人桌面陪伴测试海报"
               width="748"
               height="896"
@@ -446,7 +459,7 @@ export default function Home() {
           <h2>关于时光旅人</h2>
           <p>先回答你可能最关心的几件事。</p>
           <div className="faq-assurance">
-            <span><i /> 独立隐私说明</span>
+            <span><i /> 独立隐私页面</span>
             <span><i /> PC 版优先上线</span>
             <span><i /> 移动端入口已预留</span>
           </div>
@@ -465,6 +478,7 @@ export default function Home() {
         </div>
       </section>
 
+      </main>
       <footer className="site-footer">
         <div className="footer-brand">
           <span className="brand-mark brand-mark-footer" aria-hidden="true"><i /></span>
@@ -474,13 +488,14 @@ export default function Home() {
         <div className="footer-meta">
           <div className="footer-links">
             <a href={withBasePath("/about/")}>关于我们 ↗</a>
-            <a href={withBasePath("/privacy/")}>隐私政策 ↗</a>
+            <a href={withBasePath("/privacy/")}>产品隐私草案 ↗</a>
             <a href="#top">返回顶部 ↑</a>
           </div>
-          <p>下载或使用产品前，请先阅读并了解隐私政策。</p>
+          <p>当前为公开预览站；产品隐私草案仍需按真实技术实现与运营主体审定。</p>
           <span>© 2026 TIME TRAVELER</span>
         </div>
       </footer>
-    </main>
+      <PcDownloadStickyTrigger />
+    </>
   );
 }

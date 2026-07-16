@@ -39,8 +39,18 @@ jobs:
       - name: 安装依赖
         run: npm ci
 
+      # 发布流程自身保留质量门禁，避免直接推送 main 时绕过 PR 检查。
+      - name: 检查代码规范
+        run: npm run lint
+
+      - name: 检查 TypeScript 类型
+        run: npm exec -- tsc --noEmit -p tsconfig.github.json
+
       - name: 生成静态网页
         run: npm run build:github
+
+      - name: 检查关键页面与站内链接
+        run: node .github/scripts/check-static-site.mjs
 
       - name: 上传静态网页
         uses: actions/upload-pages-artifact@v3

@@ -1,12 +1,12 @@
-import { withBasePath } from "./site-config";
+import OptimizedImage from "./optimized-image";
 
 export default function SkillShowcase() {
   return (
     <div className="skill-reference" aria-label="朝朝聊天中载入 Skill 的界面演示">
       <figure className="skill-reference-scene">
-        <img
+        <OptimizedImage
           className="skill-reference-background"
-          src={withBasePath("/images/skill-ui-reference.png")}
+          src="/images/skill-ui-reference.png"
           alt="朝朝在桌面陪伴用户的产品界面"
           width="1284"
           height="730"
@@ -14,7 +14,7 @@ export default function SkillShowcase() {
         />
         <div className="skill-reference-tint" aria-hidden="true" />
         <div className="skill-reference-status">
-          <span><i /> 桌面陪伴界面</span>
+          <span><i /> AI 角色演示界面</span>
           <small>COMPANION ONLINE</small>
         </div>
         <figcaption>
@@ -28,9 +28,9 @@ export default function SkillShowcase() {
         <header>
           <div>
             <span className="skill-reference-avatar" aria-hidden="true">
-              <img src={withBasePath("/images/zhaozhao-profile-bloom.png")} alt="" />
+              <OptimizedImage src="/images/zhaozhao-profile-bloom.png" alt="" width="1672" height="941" />
             </span>
-            <p><strong>朝朝</strong><small><i /> 在线 · 共同记忆已连接</small></p>
+            <p><strong>朝朝</strong><small><i /> AI 旅伴 · 在线 · 共同记忆已连接</small></p>
           </div>
           <span className="skill-reference-active">运势 · 已载入</span>
         </header>
@@ -44,7 +44,7 @@ export default function SkillShowcase() {
           <p className="skill-reference-user">朝朝，帮我看看今天的状态吧。</p>
           <div className="skill-reference-reply">
             <span aria-hidden="true">
-              <img src={withBasePath("/images/zhaozhao-profile-bloom.png")} alt="" />
+              <OptimizedImage src="/images/zhaozhao-profile-bloom.png" alt="" width="1672" height="941" />
             </span>
             <p>今天的关键词是“慢一点”。先照顾好自己的节奏，好运会从完成手边的小事开始。</p>
           </div>
