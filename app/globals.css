@@ -5550,6 +5550,134 @@ main {
   }
 }
 
+/* 手机最终适配：保留“关于我们”，压缩首屏与功能卡，同时把主要触控目标提高到 44px。 */
+@media (max-width: 600px) {
+  .site-nav {
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+  }
+
+  .nav-links {
+    display: flex;
+    justify-self: end;
+    gap: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+  }
+
+  .nav-links a {
+    display: none;
+  }
+
+  .nav-links a:first-child {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 4px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 11px;
+  }
+
+  .nav-download {
+    grid-column: 3;
+  }
+
+  .nav-cta {
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  .hero,
+  .hero-inner {
+    min-height: 920px;
+  }
+
+  .hero-actions {
+    width: auto;
+    max-width: 330px;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .hero-actions .button {
+    min-height: 48px;
+    padding-inline: 15px;
+    font-size: 12px;
+  }
+
+  .hero-note {
+    display: none;
+  }
+
+  .hero-stage {
+    height: 480px;
+  }
+
+  .floating-chat {
+    top: 36%;
+  }
+
+  .feature-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-item,
+  .feature-item:nth-child(n) {
+    min-height: 210px;
+    padding: 24px 18px 26px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .feature-item:nth-child(odd) {
+    border-right: 1px solid var(--line-dark);
+  }
+
+  .feature-item:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .feature-item h3 {
+    margin-top: 34px;
+    font-size: 20px;
+  }
+
+  .feature-item p {
+    font-size: 12px;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(44px, 12vw, 56px);
+  }
+
+  .about-brand,
+  .about-nav > a:last-child {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* 极窄屏回退为单列，避免功能卡文字被压得过碎。 */
+@media (max-width: 360px) {
+  .feature-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-item,
+  .feature-item:nth-child(n) {
+    min-height: 180px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .feature-item:last-child {
+    border-bottom: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

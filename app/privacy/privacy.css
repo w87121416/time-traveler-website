@@ -819,6 +819,14 @@
     font-size: 10px;
   }
 
+  /* 手机端导航保持完整的 44px 触控高度，避免品牌与返回入口过难点击。 */
+  .privacy-brand,
+  .privacy-back {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
   .privacy-hero {
     min-height: 650px;
     grid-template-columns: 1fr;

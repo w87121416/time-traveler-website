@@ -1,19 +1,15 @@
 import assert from "node:assert/strict";
-import { access, readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-const templateRoot = new URL("../", import.meta.url);
-const previewRoot = new URL("../app/_sites-preview/", import.meta.url);
-
-async function render() {
+// 直接请求构建后的 Worker，确保托管产物与用户真正访问到的 HTML 一致。
+async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${pathname}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", {
+    new Request(`http://localhost${pathname}`, {
       headers: { accept: "text/html" },
     }),
     {
@@ -28,60 +24,61 @@ async function render() {
   );
 }
 
-test("server-renders the starter loading skeleton", async () => {
+test("server-renders the public Time Traveler homepage", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<title>Your site is taking shape<\/title>/i);
-  assert.match(html, /Codex is working/);
-  assert.match(html, /Your site is taking shape/);
-  assert.match(html, /Codex is building the first version/);
-  assert.match(html, /react-loading-skeleton/);
-  assert.match(html, /role="status"/);
+  assert.match(html, /<title>时光旅人｜住在桌面上的 AI 旅伴<\/title>/i);
+  assert.match(html, /<link rel="canonical" href="https:\/\/www\.sinbookey\.com\/"\/>/i);
+  assert.match(html, /aria-label="主导航"/);
+  assert.match(html, />关于我们<\/a>/);
+  assert.match(html, /为聊天添加不同 Skill/);
+  assert.match(html, /同一位朝朝/);
+  assert.match(html, /获取 PC 版/);
+  assert.match(html, /href="\/privacy\/"/);
+  assert.doesNotMatch(html, /codex-preview|Your site is taking shape|登录后访问/i);
 });
 
-test("keeps the loading skeleton scoped and disposable", async () => {
-  const [preview, css, page, layout, packageJson, files] = await Promise.all([
-    readFile(new URL("SkeletonPreview.tsx", previewRoot), "utf8"),
-    readFile(new URL("preview.css", previewRoot), "utf8"),
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readdir(previewRoot),
+test("server-renders the independent about and privacy pages", async () => {
+  const [aboutResponse, privacyResponse] = await Promise.all([
+    render("/about/"),
+    render("/privacy/"),
   ]);
 
-  assert.deepEqual(files.sort(), ["SkeletonPreview.tsx", "preview.css"]);
-  assert.match(preview, /from "react-loading-skeleton"/);
-  assert.match(preview, /baseColor="#eceae7"/);
-  assert.match(preview, /highlightColor="#f9f8f6"/);
-  assert.match(preview, /duration=\{2\.8\}/);
-  assert.match(preview, /sites-skeleton-search-placeholder/);
-  assert.match(packageJson, /"react-loading-skeleton": "3\.5\.0"/);
+  assert.equal(aboutResponse.status, 200);
+  assert.equal(privacyResponse.status, 200);
 
-  const shellIndex = preview.indexOf('className="sites-skeleton-shell"');
-  const statusIndex = preview.indexOf('className="sites-skeleton-status"');
-  assert.ok(shellIndex >= 0 && statusIndex > shellIndex);
-  assert.match(css, /position:\s*fixed/);
-  assert.match(css, /inset:\s*0/);
-  assert.match(css, /opacity:\s*0\.52/);
-  assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.doesNotMatch(css, /#020617|canvas|pets|progress/i);
-  assert.doesNotMatch(
-    preview,
-    /loading-spinner|status-mark|status-progress|canvas|cookie|random/i,
-  );
+  const [aboutHtml, privacyHtml] = await Promise.all([
+    aboutResponse.text(),
+    privacyResponse.text(),
+  ]);
 
-  assert.match(page, /export const metadata:\s*Metadata/);
-  assert.match(page, /"codex-preview": "development"/);
-  assert.match(page, /<SkeletonPreview \/>/);
-  assert.match(layout, /title:\s*"Starter Project"/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
-  assert.doesNotMatch(css, /(^|\s)(html|body)\s*\{/m);
+  assert.match(aboutHtml, /让 AI 陪伴，/);
+  assert.match(aboutHtml, /真正住进日常/);
+  assert.match(privacyHtml, /<title>隐私政策｜时光旅人<\/title>/i);
+  assert.match(privacyHtml, /PRIVACY POLICY · TIME TRAVELER/);
+  assert.match(privacyHtml, /预发布草案/);
+});
 
-  await assert.rejects(
-    access(new URL("public/_sites-preview", templateRoot)),
-  );
+test("keeps GitHub Pages output static and base-path aware", async () => {
+  const [config, page, layout, siteConfig, downloadMenu] = await Promise.all([
+    readFile(new URL("../next.config.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/site-config.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/download-menu.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(config, /output:\s*"export"/);
+  assert.match(config, /trailingSlash:\s*true/);
+  assert.match(config, /unoptimized:\s*true/);
+  assert.match(siteConfig, /NEXT_PUBLIC_BASE_PATH/);
+  assert.match(siteConfig, /https:\/\/www\.sinbookey\.com/);
+  assert.match(page, /withBasePath\("\/about\/"\)/);
+  assert.match(page, /withBasePath\("\/images\/companion-hero\.png"\)/);
+  assert.match(downloadMenu, /withBasePath\("\/privacy\/"\)/);
+  assert.match(layout, /metadataBase/);
+  assert.doesNotMatch(page, /SkeletonPreview|login|登录页/i);
 });
