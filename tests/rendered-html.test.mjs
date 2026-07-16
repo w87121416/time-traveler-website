@@ -63,12 +63,13 @@ test("server-renders the independent about and privacy pages", async () => {
 });
 
 test("keeps GitHub Pages output static and base-path aware", async () => {
-  const [config, page, layout, siteConfig, downloadMenu] = await Promise.all([
+  const [config, page, layout, siteConfig, downloadMenu, workflow] = await Promise.all([
     readFile(new URL("../next.config.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/site-config.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/download-menu.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8"),
   ]);
 
   assert.match(config, /output:\s*"export"/);
@@ -80,5 +81,10 @@ test("keeps GitHub Pages output static and base-path aware", async () => {
   assert.match(page, /withBasePath\("\/images\/companion-hero\.png"\)/);
   assert.match(downloadMenu, /withBasePath\("\/privacy\/"\)/);
   assert.match(layout, /metadataBase/);
+  assert.match(workflow, /NEXT_PUBLIC_BASE_PATH:\s*\/time-traveler-website/);
+  assert.match(
+    workflow,
+    /NEXT_PUBLIC_SITE_URL:\s*https:\/\/w87121416\.github\.io\/time-traveler-website/,
+  );
   assert.doesNotMatch(page, /SkeletonPreview|login|登录页/i);
 });
