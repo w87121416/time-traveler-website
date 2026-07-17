@@ -5114,6 +5114,15 @@ main {
   font-size: 15px;
 }
 
+/* 企业识别码保持低层级展示，兼顾官网可信度与品牌卡片的简洁感。 */
+.about-company small {
+  display: block;
+  margin-top: 8px;
+  color: rgba(8, 11, 24, 0.48);
+  font-size: 9px;
+  letter-spacing: 0.02em;
+}
+
 .about-company p {
   margin: 0;
   color: rgba(8, 11, 24, 0.56);

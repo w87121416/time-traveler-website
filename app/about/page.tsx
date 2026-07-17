@@ -101,6 +101,7 @@ export default function AboutPage() {
           <div>
             <span>OPERATOR</span>
             <strong>南京形而不器科技有限公司</strong>
+            <small>统一社会信用代码：91320191MAELQ1L0XQ</small>
           </div>
           <p>
             我们在南京打造“时光旅人”。官网内容由团队自主策划，部分视觉与宣传素材包含 AI 生成内容，并由团队美术完成人工修改与再创作；产品目前处于公开预览阶段，PC 客户端尚未开放下载。

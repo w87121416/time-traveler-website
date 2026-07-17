@@ -8,6 +8,7 @@ const structuredData = {
       "@id": `${absoluteSiteUrl("/")}#organization`,
       legalName: "南京形而不器科技有限公司",
       name: "时光旅人",
+      taxID: "91320191MAELQ1L0XQ",
       url: absoluteSiteUrl("/"),
       email: "414011506@qq.com",
       address: {

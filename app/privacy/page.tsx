@@ -79,7 +79,7 @@ export function ProductPrivacyDraft() {
           <strong>0.2 / 待发布</strong>
           <dl>
             <div><dt>发布日期</dt><dd>2026 年 7 月 15 日</dd></div>
-            <div><dt>更新日期</dt><dd>2026 年 7 月 17 日</dd></div>
+            <div><dt>更新日期</dt><dd>2026 年 7 月 18 日</dd></div>
             <div><dt>生效日期</dt><dd>PC 产品开放前另行公布</dd></div>
             <div><dt>适用产品</dt><dd>未来 PC 客户端</dd></div>
           </dl>
@@ -334,6 +334,7 @@ export function ProductPrivacyDraft() {
             </p>
             <dl className="contact-card">
               <div><dt>个人信息处理者</dt><dd>南京形而不器科技有限公司</dd></div>
+              <div><dt>统一社会信用代码</dt><dd>91320191MAELQ1L0XQ</dd></div>
               <div><dt>隐私联系邮箱</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
               <div><dt>客服与投诉渠道</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
               <div><dt>联系地址</dt><dd>中国（江苏）自由贸易试验区南京片区七里桥北路1号南京江北新区人力资源服务产业园一期17栋106-707室</dd></div>
@@ -390,7 +391,7 @@ export default function WebsitePrivacyPage() {
             <span className="brand-mark" aria-hidden="true"><i /></span>
             <span>时光旅人</span>
           </a>
-          <span className="privacy-status">1.0 · 已生效</span>
+          <span className="privacy-status">1.1 · 已生效</span>
           <a className="privacy-back" href={withBasePath("/")}>返回官网 <span aria-hidden="true">↗</span></a>
         </header>
 
@@ -405,9 +406,10 @@ export default function WebsitePrivacyPage() {
           </div>
           <div className="privacy-version-card">
             <span>POLICY STATUS</span>
-            <strong>1.0 / 生效</strong>
+            <strong>1.1 / 生效</strong>
             <dl>
               <div><dt>发布日期</dt><dd>2026 年 7 月 17 日</dd></div>
+              <div><dt>更新日期</dt><dd>2026 年 7 月 18 日</dd></div>
               <div><dt>生效日期</dt><dd>2026 年 7 月 17 日</dd></div>
               <div><dt>适用范围</dt><dd>时光旅人官方网站</dd></div>
             </dl>
@@ -447,6 +449,7 @@ export default function WebsitePrivacyPage() {
               </p>
               <dl className="contact-card">
                 <div><dt>运营主体</dt><dd>南京形而不器科技有限公司</dd></div>
+                <div><dt>统一社会信用代码</dt><dd>91320191MAELQ1L0XQ</dd></div>
                 <div><dt>联系邮箱</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
                 <div><dt>联系地址</dt><dd>中国（江苏）自由贸易试验区南京片区七里桥北路1号南京江北新区人力资源服务产业园一期17栋106-707室</dd></div>
               </dl>
@@ -531,7 +534,7 @@ export default function WebsitePrivacyPage() {
               <dl className="contact-card">
                 <div><dt>隐私、客服与投诉邮箱</dt><dd><a href="mailto:414011506@qq.com">414011506@qq.com</a></dd></div>
                 <div><dt>运营主体</dt><dd>南京形而不器科技有限公司</dd></div>
-                <div><dt>当前版本</dt><dd>1.0 · 2026 年 7 月 17 日生效</dd></div>
+                <div><dt>当前版本</dt><dd>1.1 · 2026 年 7 月 18 日更新</dd></div>
               </dl>
             </section>
           </article>

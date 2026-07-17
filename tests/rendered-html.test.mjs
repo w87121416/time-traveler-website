@@ -74,7 +74,7 @@ test("server-renders the independent company, privacy and safety pages", async (
   assert.match(aboutHtml, /包含 AI 生成内容/);
   assert.match(privacyHtml, /<title>官方网站隐私说明｜时光旅人<\/title>/i);
   assert.match(privacyHtml, /WEBSITE PRIVACY NOTICE · TIME TRAVELER/);
-  assert.match(privacyHtml, /1\.0 \/ 生效/);
+  assert.match(privacyHtml, /1\.1 \/ 生效/);
   assert.match(productPrivacyHtml, /PC 产品隐私政策/);
   assert.match(productPrivacyHtml, /待发布/);
   assert.match(safetyHtml, /AI 安全与未成年人保护/);
