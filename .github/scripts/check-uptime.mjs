@@ -11,7 +11,9 @@ const endpointChecks = [
   { path: "/", contentType: /text\/html/i, marker: /时光旅人/ },
   { path: "/about/", contentType: /text\/html/i, marker: /时光旅人|关于我们/ },
   { path: "/privacy/", contentType: /text\/html/i, marker: /官方网站隐私说明/ },
-  { path: "/product-privacy/", contentType: /text\/html/i, marker: /PC 产品隐私政策/ },
+  { path: "/product-privacy/", contentType: /text\/html/i, marker: /时光旅人隐私政策/ },
+  // 用户协议虽处于未生效公开预览状态，但已经从官网提供公开入口，需要纳入每日可用性监控。
+  { path: "/user-agreement/", contentType: /text\/html/i, marker: /时光旅人用户服务协议/ },
   { path: "/safety/", contentType: /text\/html/i, marker: /AI 安全与未成年人保护/ },
   { path: "/terms/", contentType: /text\/html/i, marker: /官方网站使用条款/ },
   { path: "/robots.txt", contentType: /text\/plain/i, marker: /User-agent:\s*\*/i },

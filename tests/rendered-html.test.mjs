@@ -39,17 +39,20 @@ test("server-renders the public Time Traveler homepage", async () => {
   assert.match(html, /花影中的银发时光旅人朝朝/);
   assert.match(html, /查看 PC 版进度/);
   assert.match(html, /href="\/privacy\/"/);
+  assert.match(html, /href="\/product-privacy\/"/);
+  assert.match(html, /href="\/user-agreement\/"/);
   assert.match(html, /部分视觉素材包含 AI 生成内容，并经团队美术人工修改与再创作/);
   assert.doesNotMatch(html, /共同记忆中的照片碎片/);
   assert.doesNotMatch(html, /网站角色与视觉素材由团队自研/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|登录后访问/i);
 });
 
-test("server-renders the independent company, privacy and safety pages", async () => {
-  const [aboutResponse, privacyResponse, productPrivacyResponse, safetyResponse, termsResponse] = await Promise.all([
+test("server-renders the independent company, privacy, agreement and safety pages", async () => {
+  const [aboutResponse, privacyResponse, productPrivacyResponse, userAgreementResponse, safetyResponse, termsResponse] = await Promise.all([
     render("/about/"),
     render("/privacy/"),
     render("/product-privacy/"),
+    render("/user-agreement/"),
     render("/safety/"),
     render("/terms/"),
   ]);
@@ -57,13 +60,15 @@ test("server-renders the independent company, privacy and safety pages", async (
   assert.equal(aboutResponse.status, 200);
   assert.equal(privacyResponse.status, 200);
   assert.equal(productPrivacyResponse.status, 200);
+  assert.equal(userAgreementResponse.status, 200);
   assert.equal(safetyResponse.status, 200);
   assert.equal(termsResponse.status, 200);
 
-  const [aboutHtml, privacyHtml, productPrivacyHtml, safetyHtml, termsHtml] = await Promise.all([
+  const [aboutHtml, privacyHtml, productPrivacyHtml, userAgreementHtml, safetyHtml, termsHtml] = await Promise.all([
     aboutResponse.text(),
     privacyResponse.text(),
     productPrivacyResponse.text(),
+    userAgreementResponse.text(),
     safetyResponse.text(),
     termsResponse.text(),
   ]);
@@ -75,8 +80,18 @@ test("server-renders the independent company, privacy and safety pages", async (
   assert.match(privacyHtml, /<title>官方网站隐私说明｜时光旅人<\/title>/i);
   assert.match(privacyHtml, /WEBSITE PRIVACY NOTICE · TIME TRAVELER/);
   assert.match(privacyHtml, /1\.1 \/ 生效/);
-  assert.match(productPrivacyHtml, /PC 产品隐私政策/);
-  assert.match(productPrivacyHtml, /待发布/);
+  assert.match(productPrivacyHtml, /时光旅人隐私政策/);
+  assert.match(productPrivacyHtml, /0\.9 \/ 未生效/);
+  assert.match(productPrivacyHtml, /公开预览稿 · 尚未生效/);
+  assert.match(productPrivacyHtml, /千问 3\.6 Flash/);
+  assert.match(productPrivacyHtml, /91320191MAELQ1L0XQ/);
+  assert.match(productPrivacyHtml, /414011506@qq\.com/);
+  assert.match(userAgreementHtml, /时光旅人用户服务协议/);
+  assert.match(userAgreementHtml, /0\.9 \/ 未生效/);
+  assert.match(userAgreementHtml, /角色 Skill/);
+  assert.match(userAgreementHtml, /公开预览稿 · 尚未生效/);
+  assert.match(userAgreementHtml, /南京形而不器科技有限公司/);
+  assert.match(userAgreementHtml, /414011506@qq\.com/);
   assert.match(safetyHtml, /AI 安全与未成年人保护/);
   assert.match(safetyHtml, /连续使用每超过两小时/);
   assert.match(termsHtml, /官方网站使用条款/);
@@ -88,13 +103,15 @@ test("server-renders the independent company, privacy and safety pages", async (
 });
 
 test("keeps GitHub Pages output static and base-path aware", async () => {
-  const [config, page, layout, siteConfig, downloadMenu, workflow] = await Promise.all([
+  const [config, page, layout, siteConfig, downloadMenu, workflow, sitemap, projectRules] = await Promise.all([
     readFile(new URL("../next.config.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/site-config.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/download-menu.tsx", import.meta.url), "utf8"),
     readFile(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8"),
+    readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8"),
+    readFile(new URL("../AGENTS.md", import.meta.url), "utf8"),
   ]);
 
   assert.match(config, /output:\s*"export"/);
@@ -106,6 +123,7 @@ test("keeps GitHub Pages output static and base-path aware", async () => {
   assert.match(page, /<OptimizedImage/);
   assert.match(page, /time-traveler-pv-web\.mp4/);
   assert.match(downloadMenu, /withBasePath\("\/product-privacy\/"\)/);
+  assert.match(downloadMenu, /withBasePath\("\/user-agreement\/"\)/);
   assert.match(layout, /metadataBase/);
   assert.match(workflow, /NEXT_PUBLIC_BASE_PATH:\s*""/);
   assert.match(
@@ -113,4 +131,7 @@ test("keeps GitHub Pages output static and base-path aware", async () => {
     /NEXT_PUBLIC_SITE_URL:\s*https:\/\/www\.sinbookey\.com/,
   );
   assert.doesNotMatch(page, /SkeletonPreview|login|登录页/i);
+  assert.doesNotMatch(sitemap, /user-agreement/);
+  assert.match(projectRules, /只允许本地开发、测试与预览/);
+  assert.match(projectRules, /禁止推送或同步 GitHub/);
 });

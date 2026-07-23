@@ -419,7 +419,7 @@ export default function WebsitePrivacyPage() {
         <div className="privacy-draft-banner" role="note">
           <span>范围提示</span>
           <p>
-            PC 客户端尚未开放下载。本说明不覆盖未来客户端的账号、AI 对话、长期记忆或系统权限；相关设计基线请参阅<a href={withBasePath("/product-privacy/")}>《PC 产品隐私政策（待发布）》</a>。
+            PC 客户端尚未开放下载。本说明不覆盖未来客户端的账号、AI 对话、长期记忆或系统权限；相关设计基线请参阅<a href={withBasePath("/product-privacy/")}>《PC 产品隐私政策（公开预览稿）》</a>。
           </p>
         </div>
 
@@ -547,7 +547,8 @@ export default function WebsitePrivacyPage() {
           <strong>时光旅人</strong>
         </div>
         <nav aria-label="隐私相关链接">
-          <a href={withBasePath("/product-privacy/")}>PC 产品隐私待发布</a>
+          <a href={withBasePath("/product-privacy/")}>PC 产品隐私公开预览</a>
+          <a href={withBasePath("/user-agreement/")}>PC 用户协议公开预览</a>
           <a href={withBasePath("/safety/")}>AI 安全与未成年人保护</a>
           <a href={withBasePath("/terms/")}>官方网站使用条款</a>
         </nav>
