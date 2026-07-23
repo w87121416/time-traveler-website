@@ -476,6 +476,8 @@ export default function Home() {
             <a href={withBasePath("/about/")}>关于我们 ↗</a>
             <a href={withBasePath("/privacy/")}>官网隐私说明 ↗</a>
             <a href={withBasePath("/terms/")}>使用条款 ↗</a>
+            <a href={withBasePath("/product-privacy/")}>产品隐私政策 ↗</a>
+            <a href={withBasePath("/user-agreement/")}>用户协议 ↗</a>
             <a href={withBasePath("/safety/")}>AI 安全说明 ↗</a>
             <a href="#top">返回顶部 ↑</a>
           </div>

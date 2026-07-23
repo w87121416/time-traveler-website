@@ -149,6 +149,7 @@ export default function TermsPage() {
         <div><span className="brand-mark" aria-hidden="true"><i /></span><strong>时光旅人</strong></div>
         <nav aria-label="使用条款相关链接">
           <a href={withBasePath("/privacy/")}>官方网站隐私说明</a>
+          <a href={withBasePath("/user-agreement/")}>PC 用户协议公开预览</a>
           <a href={withBasePath("/safety/")}>AI 安全说明</a>
         </nav>
         <a href={withBasePath("/")}>返回官网 ↑</a>

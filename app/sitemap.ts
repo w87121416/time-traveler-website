@@ -13,7 +13,7 @@ const publicPages = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // PC 产品隐私仍是 noindex 待发布版本，因此只收录已生效的官网说明与公开安全页。
+  // 两份客户端协议仍是 noindex 的未生效公开预览稿，因此只收录已生效的官网说明与公开安全页。
   return publicPages.map(({ path, changeFrequency, priority }) => ({
     url: absoluteSiteUrl(path),
     changeFrequency,

@@ -43,7 +43,8 @@ function DownloadPanel({ dialog = false }: { dialog?: boolean }) {
         ) : (
           <a className="download-status-link" href={withBasePath("/about/")}>查看产品计划 ↗</a>
         )}
-        <a href={withBasePath("/product-privacy/")}>阅读 PC 产品隐私待发布版 ↗</a>
+        <a href={withBasePath("/product-privacy/")}>阅读 PC 产品隐私公开预览版 ↗</a>
+        <a href={withBasePath("/user-agreement/")}>阅读 PC 用户协议公开预览版 ↗</a>
       </div>
     </div>
   );

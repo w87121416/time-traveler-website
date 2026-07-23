@@ -92,11 +92,12 @@ async function resolvesInsideExport(reference, sourcePublicPath) {
   return (await Promise.all(safeCandidates.map(exists))).some(Boolean);
 }
 
-const [home, about, privacy, productPrivacy, safety, terms, robots, sitemap, manifest, cname] = await Promise.all([
+const [home, about, privacy, productPrivacy, userAgreement, safety, terms, robots, sitemap, manifest, cname] = await Promise.all([
   requireFile("index.html"),
   requireFile("about/index.html"),
   requireFile("privacy/index.html"),
   requireFile("product-privacy/index.html"),
+  requireFile("user-agreement/index.html"),
   requireFile("safety/index.html"),
   requireFile("terms/index.html"),
   requireFile("robots.txt"),
@@ -110,7 +111,8 @@ assert.match(home, /<title>[^<]*时光旅人[^<]*<\/title>/i);
 assert.match(home, /查看 PC 版进度/);
 assert.match(about, /<title>[^<]*(?:关于|时光旅人)[^<]*<\/title>/i);
 assert.match(privacy, /官方网站隐私说明/);
-assert.match(productPrivacy, /PC 产品隐私政策/);
+assert.match(productPrivacy, /时光旅人隐私政策/);
+assert.match(userAgreement, /时光旅人用户服务协议/);
 assert.match(safety, /AI 安全与未成年人保护/);
 assert.match(terms, /官方网站使用条款/);
 assert.match(robots, /User-agent:\s*\*/i);
@@ -122,6 +124,8 @@ for (const pathname of ["/", "/about/", "/privacy/", "/safety/", "/terms/"]) {
   assert.match(sitemap, new RegExp(`<loc>https:\\/\\/www\\.sinbookey\\.com${pathname.replaceAll("/", "\\/")}<\\/loc>`, "i"));
 }
 assert.doesNotMatch(sitemap, /<loc>https:\/\/www\.sinbookey\.com\/product-privacy\/<\/loc>/i);
+// 两份客户端协议目前均为未生效公开预览稿，可以公开访问，但不应进入搜索引擎站点地图。
+assert.doesNotMatch(sitemap, /<loc>https:\/\/www\.sinbookey\.com\/user-agreement\/<\/loc>/i);
 
 const htmlFiles = await findHtmlFiles();
 const brokenReferences = [];

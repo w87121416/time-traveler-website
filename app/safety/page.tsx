@@ -170,7 +170,7 @@ export default function SafetyPage() {
         <div><span className="brand-mark" aria-hidden="true"><i /></span><strong>时光旅人</strong></div>
         <nav aria-label="安全说明相关链接">
           <a href={withBasePath("/privacy/")}>官方网站隐私说明</a>
-          <a href={withBasePath("/product-privacy/")}>PC 产品隐私待发布</a>
+          <a href={withBasePath("/product-privacy/")}>PC 产品隐私公开预览</a>
           <a href={withBasePath("/terms/")}>官方网站使用条款</a>
         </nav>
         <a href={withBasePath("/")}>返回官网 ↑</a>
