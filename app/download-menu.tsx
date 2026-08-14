@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { releaseChannels } from "./release-config";
 import { withBasePath } from "./site-config";
 
 const OPEN_PC_DOWNLOAD = "time-traveler:open-pc-download";
+const PC_DOWNLOAD_OPENED = "time-traveler:pc-download-opened";
+const MOBILE_NAV_OPENED = "time-traveler:mobile-nav-opened";
 const pcRelease = releaseChannels.pc;
 
 function publicAsset(path: string): string {
@@ -59,6 +61,8 @@ export function PcDownloadMenu() {
   useEffect(() => {
     // 首屏按钮通过同页事件打开真正的 details，避免只改变视觉却没有更新可访问状态。
     const openMenu = () => {
+      // 无论随后打开 details 还是 dialog，都先通知移动主菜单收起。
+      window.dispatchEvent(new Event(PC_DOWNLOAD_OPENED));
       // 手机端使用原生模态框，保证用户滚动到页面中后仍能看见发布信息。
       if (window.matchMedia("(max-width: 900px)").matches && dialogRef.current?.showModal) {
         if (!dialogRef.current.open) {
@@ -77,12 +81,28 @@ export function PcDownloadMenu() {
     };
 
     window.addEventListener(OPEN_PC_DOWNLOAD, openMenu);
-    return () => window.removeEventListener(OPEN_PC_DOWNLOAD, openMenu);
+    // 手机主菜单打开时关闭下载入口，防止两个浮层同时覆盖页面。
+    const closeForMobileNav = () => {
+      if (detailsRef.current) detailsRef.current.open = false;
+      if (dialogRef.current?.open) dialogRef.current.close();
+    };
+
+    window.addEventListener(MOBILE_NAV_OPENED, closeForMobileNav);
+    return () => {
+      window.removeEventListener(OPEN_PC_DOWNLOAD, openMenu);
+      window.removeEventListener(MOBILE_NAV_OPENED, closeForMobileNav);
+    };
   }, []);
 
   return (
     <>
-      <details className="nav-download" ref={detailsRef}>
+      <details
+        className="nav-download"
+        ref={detailsRef}
+        onToggle={(event) => {
+          if (event.currentTarget.open) window.dispatchEvent(new Event(PC_DOWNLOAD_OPENED));
+        }}
+      >
         <summary className="nav-cta" id="pc-download">
           {pcRelease.downloadUrl ? "下载 PC 版" : "PC 版进度"} <span aria-hidden="true">↘</span>
         </summary>
@@ -123,10 +143,34 @@ export function PcDownloadTrigger() {
 }
 
 export function PcDownloadStickyTrigger() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const updateVisibility = () => {
+      const hero = document.querySelector<HTMLElement>(".hero");
+      const footer = document.querySelector<HTMLElement>(".site-footer");
+      const heroBottom = hero?.getBoundingClientRect().bottom ?? 0;
+      const footerTop = footer?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
+
+      // 首屏内不重复展示悬浮入口，页脚进入视口后也收起，避免遮挡角色和协议链接。
+      setIsVisible(heroBottom < 80 && footerTop > window.innerHeight - 24);
+    };
+
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+    };
+  }, []);
+
   return (
     <button
-      className="mobile-sticky-cta"
+      className={`mobile-sticky-cta${isVisible ? " is-visible" : ""}`}
       type="button"
+      aria-hidden={!isVisible}
+      tabIndex={isVisible ? 0 : -1}
       onClick={() => window.dispatchEvent(new Event(OPEN_PC_DOWNLOAD))}
     >
       {pcRelease.downloadUrl ? "下载 PC 版" : "PC 版进度"} <span aria-hidden="true">↗</span>

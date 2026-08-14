@@ -6050,6 +6050,232 @@ main {
   font-size: 12px;
 }
 
+/* 手机自适应收尾：让顶部、首屏、海报和固定入口在 320–430px 宽度内保持完整。 */
+@media (max-width: 900px) {
+  .mobile-sticky-cta {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(14px);
+    transition:
+      opacity 180ms ease,
+      visibility 180ms ease,
+      transform 180ms ease;
+  }
+
+  .mobile-sticky-cta.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 430px) {
+  :root {
+    --content: calc(100vw - 32px);
+  }
+
+  .site-nav {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+  }
+
+  .brand {
+    min-width: 0;
+    min-height: 44px;
+  }
+
+  .brand > span:last-child {
+    white-space: nowrap;
+  }
+
+  .mobile-nav {
+    grid-column: 2;
+  }
+
+  /* 首屏已有按钮，窄屏顶部隐藏重复入口，滚过首屏后再显示悬浮入口。 */
+  .nav-download {
+    display: none;
+  }
+
+  .hero,
+  .hero-inner {
+    min-height: 900px;
+  }
+
+  .hero-inner {
+    padding-top: 112px;
+  }
+
+  .hero h1 {
+    margin: 26px 0 22px;
+    font-size: clamp(74px, 24vw, 96px);
+  }
+
+  .hero-lead {
+    font-size: 20px;
+  }
+
+  .hero-description {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .hero-stage {
+    height: 440px;
+  }
+
+  .desktop-window {
+    width: 108vw;
+    right: -42vw;
+    top: 18%;
+  }
+
+  .hero-character {
+    height: clamp(520px, 142vw, 600px);
+    right: -18vw;
+    bottom: -25%;
+  }
+
+  .floating-chat {
+    top: 34%;
+    left: 0;
+    width: min(250px, 76vw);
+  }
+
+  .manifesto h2,
+  .daily-copy h2,
+  .skills-copy h2,
+  .personality-copy h2,
+  .memory-copy h2,
+  .travel-heading h2,
+  .film-heading h2,
+  .download-copy h2 {
+    font-size: clamp(39px, 11vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+  }
+
+  .daily-section {
+    gap: 52px;
+    padding-inline: 20px;
+  }
+
+  .daily-lead {
+    margin: 28px 0 38px;
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .moment-list > div {
+    grid-template-columns: 52px 1fr;
+    gap: 12px;
+  }
+
+  .desktop-scene {
+    transform: none;
+  }
+
+  .scene-topbar {
+    padding-inline: 14px;
+    font-size: 8px;
+  }
+
+  .scene-reaction-card {
+    width: min(176px, 58vw);
+    padding: 12px 14px;
+  }
+
+  .skills-section {
+    padding-inline: 16px;
+  }
+
+  .skill-reference-chat header {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .skill-reference-chat header > div {
+    min-width: 0;
+  }
+
+  .skill-reference-active {
+    flex: 0 0 auto;
+  }
+
+  .film-labels span:last-child {
+    display: none;
+  }
+
+  .film-playtest-poster {
+    min-height: 0;
+    aspect-ratio: 748 / 896;
+  }
+
+  .film-playtest-poster img {
+    object-position: center;
+  }
+
+  .nav-download-dialog {
+    overflow: visible;
+  }
+
+  .nav-download-dialog .nav-download-dialog-panel {
+    max-height: calc(100dvh - 88px);
+    overflow-y: auto;
+  }
+
+  .site-footer {
+    padding-bottom: calc(112px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 360px) {
+  .hero,
+  .hero-inner {
+    min-height: 950px;
+  }
+
+  .hero-actions {
+    width: min(240px, 100%);
+    max-width: none;
+    flex-direction: column;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  .floating-chat {
+    top: 38%;
+    width: min(230px, 76vw);
+  }
+
+  .daily-proof-row span {
+    padding-inline: 9px;
+    font-size: 8px;
+  }
+
+  .skill-reference-chat header {
+    flex-direction: column;
+  }
+
+  .skill-reference-active {
+    align-self: flex-start;
+  }
+
+  .nav-download-dialog .nav-download-dialog-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-download-dialog .nav-download-qr {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
