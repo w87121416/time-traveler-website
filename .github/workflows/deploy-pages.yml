@@ -53,7 +53,7 @@ jobs:
         run: node .github/scripts/check-static-site.mjs
 
       - name: 上传静态网页
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./out
 
